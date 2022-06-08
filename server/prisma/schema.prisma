@@ -10,48 +10,76 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
+model Exercise {
+  id         Int     @id @default(autoincrement())
+  name       String  @db.VarChar(255)
+  isWeighted Boolean
+  isTimed    Boolean
+  Set        Set[]
+  user       User?   @relation(fields: [userId], references: [id])
+  userId     Int?
+}
 
-  id Int @id @default(autoincrement())
-
-  createdAt DateTime @default(now())
-
-  updatedAt DateTime @updatedAt
-
-  title String @db.VarChar(255)
-
-  content String?
-
-  published Boolean @default(false)
-
-  author User @relation(fields: [authorId], references: [id])
-
-  authorId Int
+model Set {
+  id         Int      @id @default(autoincrement())
+  weight     Int?
+  time       Int?
+  reps       Int
+  fail       Boolean?
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exerciseId Int
+  day        Set_Day? @relation(fields: [dayId], references: [id])
+  dayId      Int?
 
 }
 
-model Profile {
+model Set_Day {
+  id    Int   @id @default(autoincrement())
+  sets  Set[]
+  day   Day   @relation(fields: [dayId], references: [id])
+  dayId Int
+}
 
-  id Int @id @default(autoincrement())
+model Day {
+  id        Int         @id @default(autoincrement())
+  name      String      @db.VarChar(255)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  sets      Set_Day[]
+  routine   Day_Routine @relation(fields: [routineId], references: [id])
+  routineId Int
+}
 
-  bio String?
+model Day_Routine {
+  id        Int     @id @default(autoincrement())
+  days      Day[]
+  dayId     Int
+  routine   Routine @relation(fields: [routineId], references: [id])
+  routineId Int
+}
 
-  user User @relation(fields: [userId], references: [id])
+model Routine {
+  id             Int           @id @default(autoincrement())
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  name           String        @db.VarChar(255)
+  days           Day_Routine[]
+  Routine_User   Routine_User  @relation(fields: [routine_UserId], references: [id])
+  routine_UserId Int
+}
 
-  userId Int @unique
-
+model Routine_User {
+  id       Int       @id @default(autoincrement())
+  routines Routine[]
+  User     User?     @relation(fields: [userId], references: [id])
+  userId   Int?
 }
 
 model User {
-
-  id Int @id @default(autoincrement())
-
-  email String @unique
-
-  name String?
-
-  posts Post[]
-
-  profile Profile?
-
+  id       Int            @id @default(autoincrement())
+  email    String         @unique
+  password String
+  name     String?
+  routines Routine_User[]
+  exercise Exercise[]
 }
