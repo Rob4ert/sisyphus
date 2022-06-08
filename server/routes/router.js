@@ -1,15 +1,15 @@
 const { Router } = require('express');
 const { createUser } = require('../controllers/user');
-const { createExercise } = require('../controllers/exercise');
+const { createExercise, deleteExercise } = require('../controllers/exercise');
 
 const router = new Router();
 
+// users
+router.post('/', createUser);
 
-router.post('/user', createUser);
-
-router.post('/exercise', createExercise);
-
-// router.get('/:userId/dashboard', sendRoutines);
+// exercises
+router.post('/:userId/exercise', createExercise);
+router.delete('/:userId/exercise/:id', deleteExercise);
 
 
 
