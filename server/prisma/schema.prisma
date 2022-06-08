@@ -16,8 +16,8 @@ model Exercise {
   isWeighted Boolean
   isTimed    Boolean
   Set        Set[]
-  user       User?   @relation(fields: [userId], references: [id])
-  userId     Int?
+  User       User    @relation(fields: [UserId], references: [id])
+  UserId     Int
 }
 
 model Set {
@@ -28,58 +28,36 @@ model Set {
   fail       Boolean?
   exercise   Exercise @relation(fields: [exerciseId], references: [id])
   exerciseId Int
-  day        Set_Day? @relation(fields: [dayId], references: [id])
-  dayId      Int?
+  Day        Day      @relation(fields: [DayId], references: [id])
+  DayId      Int
 
-}
-
-model Set_Day {
-  id    Int   @id @default(autoincrement())
-  sets  Set[]
-  day   Day   @relation(fields: [dayId], references: [id])
-  dayId Int
 }
 
 model Day {
-  id        Int         @id @default(autoincrement())
-  name      String      @db.VarChar(255)
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  sets      Set_Day[]
-  routine   Day_Routine @relation(fields: [routineId], references: [id])
-  routineId Int
-}
-
-model Day_Routine {
-  id        Int     @id @default(autoincrement())
-  days      Day[]
-  dayId     Int
-  routine   Routine @relation(fields: [routineId], references: [id])
-  routineId Int
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  sets      Set[]
+  Routine   Routine  @relation(fields: [RoutineId], references: [id])
+  RoutineId Int
 }
 
 model Routine {
-  id             Int           @id @default(autoincrement())
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  name           String        @db.VarChar(255)
-  days           Day_Routine[]
-  Routine_User   Routine_User  @relation(fields: [routine_UserId], references: [id])
-  routine_UserId Int
-}
-
-model Routine_User {
-  id       Int       @id @default(autoincrement())
-  routines Routine[]
-  User     User?     @relation(fields: [userId], references: [id])
-  userId   Int?
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String   @db.VarChar(255)
+  days      Day[]
+  User      User     @relation(fields: [UserId], references: [id])
+  UserId    Int
 }
 
 model User {
-  id       Int            @id @default(autoincrement())
-  email    String         @unique
+  id       Int        @id @default(autoincrement())
+  email    String     @unique
   password String
   name     String?
-  routines Routine_User[]
+  routines Routine[]
   exercise Exercise[]
 }
