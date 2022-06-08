@@ -1,8 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
-
-
-
+const { prisma } = require('../db');
 
 const createUser = async function (req, res) {
   const { name, password, email } = req.body;
@@ -13,7 +9,6 @@ const createUser = async function (req, res) {
         password,
         email
       }
-
     });
     res.status(201);
     res.send(user);
@@ -23,6 +18,7 @@ const createUser = async function (req, res) {
     console.log('error :>> ', error);
   }
 };
+
 
 module.exports = {
   createUser
