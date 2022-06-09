@@ -11,10 +11,10 @@ const createUser = async function (req, res) {
       }
     });
     res.status(201);
-    res.send(user);
+    res.send({ error: null, data: user });
   } catch (error) {
     res.status(401);
-    res.send(error);
+    res.send({ error: "Error creating user, please try again.", data: null });
     console.log('error :>> ', error);
   }
 };

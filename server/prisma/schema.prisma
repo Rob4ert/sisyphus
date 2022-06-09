@@ -15,9 +15,9 @@ model Exercise {
   name       String  @db.VarChar(255)
   isWeighted Boolean
   isTimed    Boolean
-  Set        Set[]
-  User       User    @relation(fields: [UserId], references: [id])
-  UserId     Int
+  set        Set[]
+  user       User    @relation(fields: [userId], references: [id])
+  userId     Int
 }
 
 model Set {
@@ -28,8 +28,8 @@ model Set {
   fail       Boolean?
   exercise   Exercise @relation(fields: [exerciseId], references: [id])
   exerciseId Int
-  Day        Day      @relation(fields: [DayId], references: [id])
-  DayId      Int
+  day        Day      @relation(fields: [dayId], references: [id])
+  dayId      Int
 
 }
 
@@ -39,8 +39,8 @@ model Day {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   sets      Set[]
-  Routine   Routine  @relation(fields: [RoutineId], references: [id])
-  RoutineId Int
+  routine   Routine  @relation(fields: [routineId], references: [id])
+  routineId Int
 }
 
 model Routine {
@@ -49,15 +49,17 @@ model Routine {
   updatedAt DateTime @updatedAt
   name      String   @db.VarChar(255)
   days      Day[]
-  User      User     @relation(fields: [UserId], references: [id])
-  UserId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
 }
 
 model User {
-  id       Int        @id @default(autoincrement())
-  email    String     @unique
-  password String
-  name     String?
-  routines Routine[]
-  exercise Exercise[]
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  email     String     @unique
+  password  String
+  name      String
+  routines  Routine[]
+  exercise  Exercise[]
 }

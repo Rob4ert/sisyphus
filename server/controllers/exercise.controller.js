@@ -9,14 +9,14 @@ const createExercise = async function (req, res) {
         name,
         isWeighted,
         isTimed,
-        User: { connect: { id: parseInt(userId) } },
+        user: { connect: { id: parseInt(userId) } },
       }
     });
     res.status(201);
-    res.send(exercise);
+    res.send({ data: exercise, error: null });
   } catch (error) {
     res.status(401);
-    res.send(error);
+    res.send({ error: "Error creating exercise, please try again.", data: null });
     console.log('error :>> ', error);
   }
 };
@@ -30,10 +30,10 @@ const deleteExercise = async function (req, res) {
       },
     });
     res.status(201);
-    res.send(exercise);
+    res.send({ data: exercise, error: null });
   } catch (error) {
     res.status(401);
-    res.send(error);
+    res.send({ error: "Error deleting exercise, please try again.", data: null });
     console.log('error :>> ', error);
   }
 };
@@ -48,10 +48,10 @@ const updateExercise = async function (req, res) {
       data: { name, isWeighted, isTimed },
     });
     res.status(201);
-    res.send(exercise);
+    res.send({ data: exercise, error: null });
   } catch (error) {
     res.status(401);
-    res.send(error);
+    res.send({ error: "Error updating exercise, please try again.", data: null });
     console.log('error :>> ', error);
   }
 };
@@ -63,10 +63,10 @@ const getExercisesByUser = async function (req, res) {
       where: { UserId: parseInt(userId) },
     });
     res.status(201);
-    res.send(exercises);
+    res.send({ data: exercises, error: null });
   } catch (error) {
     res.status(401);
-    res.send(error);
+    res.send({ error: "Error fetching exercise, please try again.", data: null });
     console.log('error :>> ', error);
   }
 };
