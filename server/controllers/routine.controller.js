@@ -21,7 +21,7 @@ const createRoutine = async function (req, res) {
     res.status(201);
     res.send({ error: null, data: routine });
   } catch (error) {
-    res.status(401);
+    res.status(400);
     res.send({ error: "Error creating routine, please try again.", data: null });
     console.log('error :>> ', error);
   }
@@ -38,7 +38,7 @@ const deleteRoutine = async function (req, res) {
     res.status(201);
     res.send({ error: null, data: routine });
   } catch (error) {
-    res.status(401);
+    res.status(400);
     res.send({ error: "Error deleting routine, please try again.", data: null });
     console.log('error :>> ', error);
   }
@@ -55,7 +55,7 @@ const updateRoutine = async function (req, res) {
     res.status(201);
     res.send({ error: null, data: newRoutine });
   } catch (error) {
-    res.status(401);
+    res.status(400);
     res.send({ error: "Error updating routine, please try again.", data: null });
     console.log('error :>> ', error);
   }
@@ -70,7 +70,7 @@ const getRoutinesByUser = async function (req, res) {
     res.status(201);
     res.send({ error: null, data: routines });
   } catch (error) {
-    res.status(401);
+    res.status(400);
     res.send({ error: "Error fetching routines, please try again.", data: null });
     console.log('error :>> ', error);
   }

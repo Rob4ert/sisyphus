@@ -17,7 +17,7 @@ const createSet = async function (req, res) {
     res.status(201);
     res.send({ error: null, data: set });
   } catch (error) {
-    res.status(401);
+    res.status(400);
     res.send({ error: "Error creating set, please try again.", data: null });
     console.log('error :>> ', error);
   }
@@ -34,7 +34,7 @@ const deleteSet = async function (req, res) {
     res.status(201);
     res.send({ error: null, data: set });
   } catch (error) {
-    res.status(401);
+    res.status(400);
     res.send({ error: "Error deleting set, please try again.", data: null });
     console.log('error :>> ', error);
   }
@@ -59,7 +59,7 @@ const updateSet = async function (req, res) {
     res.status(201);
     res.send({ error: null, data: set });
   } catch (error) {
-    res.status(401);
+    res.status(400);
     res.send({ error: "Error updating set, please try again.", data: null });
     console.log('error :>> ', error);
   }
@@ -74,7 +74,7 @@ const getSetsByDay = async function (req, res) {
     res.status(201);
     res.send({ error: null, data: sets });
   } catch (error) {
-    res.status(401);
+    res.status(400);
     res.send({ error: "Error fetching sets, please try again.", data: null });
     console.log('error :>> ', error);
   }
