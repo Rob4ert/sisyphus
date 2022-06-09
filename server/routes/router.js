@@ -14,21 +14,21 @@ router.post('/logout', checkLoggedIn, logout);
 
 // exercises
 router.post('/:userId/exercise', checkLoggedIn, checkIsUser, createExercise);
-router.delete('/:userId/exercise/:id', deleteExercise);
-router.put('/:userId/exercise/:id', updateExercise);
-router.get('/:userId/exercise/', getExercisesByUser);
+router.delete('/:userId/exercise/:id', checkLoggedIn, checkIsUser, deleteExercise);
+router.put('/:userId/exercise/:id', checkLoggedIn, checkIsUser, updateExercise);
+router.get('/:userId/exercise/', checkLoggedIn, checkIsUser, getExercisesByUser);
 
 // routine
-router.post('/:userId/routine', createRoutine);
-router.delete('/:userId/routine/:id', deleteRoutine);
-router.put('/:userId/routine/:id', updateRoutine);
-router.get('/:userId/routine/', getRoutinesByUser);
+router.post('/:userId/routine', checkLoggedIn, checkIsUser, createRoutine);
+router.delete('/:userId/routine/:id', checkLoggedIn, checkIsUser, deleteRoutine);
+router.put('/:userId/routine/:id', checkLoggedIn, checkIsUser, updateRoutine);
+router.get('/:userId/routine/', checkLoggedIn, checkIsUser, getRoutinesByUser);
 
 // sets
-router.post('/:userId/set', createSet);
-router.delete('/:userId/set/:id', deleteSet);
-router.put('/:userId/set/:id', updateSet);
-router.get('/:userId/set/', getSetsByDay);
+router.post('/:userId/set', checkLoggedIn, checkIsUser, createSet);
+router.delete('/:userId/set/:id', checkLoggedIn, checkIsUser, deleteSet);
+router.put('/:userId/set/:id', checkLoggedIn, checkIsUser, updateSet);
+router.get('/:userId/set/', checkLoggedIn, checkIsUser, getSetsByDay);
 
 
 module.exports = {
