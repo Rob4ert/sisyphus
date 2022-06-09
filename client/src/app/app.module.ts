@@ -2,8 +2,9 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginCardComponent } from './login-card/login-card.component';
+import { SignInCardComponent } from './signIn-card/signIn-card.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,7 +15,7 @@ import { AngularMaterialModule } from './material.module';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginCardComponent,
+    SignInCardComponent,
     NavBarComponent
   ],
   imports: [
@@ -24,7 +25,9 @@ import { AngularMaterialModule } from './material.module';
     LayoutModule,
     ReactiveFormsModule,
     FormsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    HttpClientModule,
+
 
   ],
   providers: [],

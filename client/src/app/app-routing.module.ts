@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginCardComponent } from './login-card/login-card.component';
+import { SignInCardComponent } from './signIn-card/signIn-card.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginCardComponent },
+  { path: 'signin', component: SignInCardComponent },
 ];
 
 @NgModule({

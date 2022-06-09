@@ -28,7 +28,7 @@ const login = async (req, res) => {
 
 const createUser = async function (req, res) {
   const user = req.body;
-  bcrypt.hash(password, saltRounds, async function (err, hash) {
+  bcrypt.hash(user.password, saltRounds, async function (err, hash) {
     if (err) console.log(err);
     try {
       user.password = hash;

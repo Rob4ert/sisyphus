@@ -1,0 +1,34 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>Sign In</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="signIn" (ngSubmit)="handleSubmit(signIn?.value)">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your email</mat-label>
+          <input type="email" matInput placeholder="Enter your email" formControlName="email" required>
+          <mat-error *ngIf="signIn.get('email')?.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input type="text" matInput placeholder="Enter your name" formControlName="name" required>
+          <mat-error *ngIf="signIn.get('name')?.invalid">Invalid Name!</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>password</mat-label>
+          <input type="password" matInput placeholder="Enter password" formControlName="password" required>
+          <mat-error *ngIf="signIn.get('password')?.invalid">{{getPasswordError()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>password</mat-label>
+          <input type="password" matInput placeholder="repeat password" formControlName="repeatPassword" required>
+          <mat-error *ngIf="signIn.get('repeatPassword')?.invalid">{{getPasswordError()}}</mat-error>
+        </mat-form-field>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">Login!</button>
+        </mat-card-actions>
+
+      </form>
+    </mat-card-content>
+
+  </mat-card>
+</div>
