@@ -1,5 +1,8 @@
 const { prisma } = require('../db');
 
+// remember to add
+// res.status(409);
+// res.send('email already in use');
 const createUser = async function (req, res) {
   const { name, password, email } = req.body;
   try {

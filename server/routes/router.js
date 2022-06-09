@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { checkLoggedIn } = require('../middlewares/auth.middleware');
 const { createUser } = require('../controllers/user.controller');
 const { createExercise, deleteExercise, updateExercise, getExercisesByUser } = require('../controllers/exercise.controller');
 const { createRoutine, deleteRoutine, updateRoutine, getRoutinesByUser } = require('../controllers/routine.controller');
@@ -10,7 +11,7 @@ const router = new Router();
 router.post('/', createUser);
 
 // exercises
-router.post('/:userId/exercise', createExercise);
+router.post('/:userId/exercise', checkLoggedIn, createExercise);
 router.delete('/:userId/exercise/:id', deleteExercise);
 router.put('/:userId/exercise/:id', updateExercise);
 router.get('/:userId/exercise/', getExercisesByUser);
