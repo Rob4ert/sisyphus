@@ -1,32 +1,30 @@
 <div class="container">
-  <mat-card layout="row" layout-align="center center">
+  <mat-card>
     <mat-card-title>Login</mat-card-title>
     <mat-card-content>
-      <div class="form-container">
-        <mat-form-field appearance="fill">
-          <mat-label>Enter your email</mat-label>
-          <input type="email" matInput placeholder="Enter your email" [formControl]="email" required>
-          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Name</mat-label>
-          <input type="text" matInput placeholder="Enter your name" [formControl]="name" required>
-          <mat-error *ngIf="name.invalid">Invalid Name!</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>password</mat-label>
-          <input type="password" matInput placeholder="Enter password" [formControl]="password" required>
-          <mat-error *ngIf="password.invalid">{{getPasswordError()}}</mat-error>
-        </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your email</mat-label>
+        <input type="email" matInput placeholder="Enter your email" [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput placeholder="Enter your name" [formControl]="name" required>
+        <mat-error *ngIf="name.invalid">Invalid Name!</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>password</mat-label>
+        <input type="password" matInput placeholder="Enter password" [formControl]="password" required>
+        <mat-error *ngIf="password.invalid">{{getPasswordError()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>password</mat-label>
+        <input type="password" matInput placeholder="repeat password" [formControl]="repeatPassword" required>
+        <mat-error *ngIf="repeatPassword.invalid">{{getPasswordError()}}</mat-error>
+      </mat-form-field>
 
-        <mat-form-field appearance="fill">
-          <mat-label>password</mat-label>
-          <input type="password" matInput placeholder="repeat password" [formControl]="repeatPassword" required>
-          <mat-error *ngIf="repeatPassword.invalid">{{getPasswordError()}}</mat-error>
-        </mat-form-field>
-      </div>
     </mat-card-content>
-    <mat-card-actions align="end">
+    <mat-card-actions>
       <button mat-raised-button color="primary">Login!</button>
     </mat-card-actions>
   </mat-card>
