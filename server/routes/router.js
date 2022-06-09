@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const { createUser } = require('../controllers/user.controller');
 const { createExercise, deleteExercise, updateExercise, getExercisesByUser } = require('../controllers/exercise.controller');
+const { createRoutine, deleteRoutine, updateRoutine, getRoutinesByUser } = require('../controllers/routine.controller');
+
 
 const router = new Router();
 

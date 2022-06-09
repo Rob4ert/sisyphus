@@ -2,13 +2,21 @@ const { prisma } = require('../db');
 
 const createRoutine = async function (req, res) {
   const { userId } = req.params;
-  const { name } = req.body;
+  const { days, name } = req.body;
   try {
     const routine = await prisma.routine.create({
       data: {
+        days: {
+          create: [
+            ...days
+          ]
+        },
         name,
         User: { connect: { id: parseInt(userId) } },
-      }
+      },
+      include: {
+        days: true, // Include all posts in the returned object
+      },
     });
     res.status(201);
     res.send(routine);
@@ -38,15 +46,15 @@ const deleteRoutine = async function (req, res) {
 
 const updateRoutine = async function (req, res) {
   const { id, userId } = req.params;
-  const { name, isWeighted, isTimed } = req.body;
+  const routine = req.body;
   try {
 
-    const routine = await prisma.routine.update({
+    const newRoutine = await prisma.routine.update({
       where: { id: parseInt(id) },
-      data: { name, isWeighted, isTimed },
+      data: routine,
     });
     res.status(201);
-    res.send(routine);
+    res.send(newRoutine);
   } catch (error) {
     res.status(401);
     res.send(error);
@@ -57,11 +65,11 @@ const updateRoutine = async function (req, res) {
 const getRoutinesByUser = async function (req, res) {
   const { userId } = req.params;
   try {
-    const Routines = await prisma.routine.findMany({
+    const routines = await prisma.routine.findMany({
       where: { UserId: parseInt(userId) },
     });
     res.status(201);
-    res.send(Routines);
+    res.send(routines);
   } catch (error) {
     res.status(401);
     res.send(error);
