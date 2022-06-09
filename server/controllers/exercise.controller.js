@@ -1,17 +1,10 @@
-const { prisma } = require('../db');
+const { writeExercise, eraseExercise, rewriteExercise, readAllExercises } = require('../models/exercise.model');
+
 
 const createExercise = async function (req, res) {
   const { userId } = req.params;
-  const { name, isWeighted, isTimed } = req.body;
   try {
-    const exercise = await prisma.exercise.create({
-      data: {
-        name,
-        isWeighted,
-        isTimed,
-        user: { connect: { id: parseInt(userId) } },
-      }
-    });
+    const exercise = await writeExercise(userId, req.body);
     res.status(201);
     res.send({ data: exercise, error: null });
   } catch (error) {
@@ -22,13 +15,9 @@ const createExercise = async function (req, res) {
 };
 
 const deleteExercise = async function (req, res) {
-  const { id, userId } = req.params;
+  const { id } = req.params;
   try {
-    const exercise = await prisma.exercise.delete({
-      where: {
-        id: parseInt(id)
-      },
-    });
+    const exercise = eraseExercise(id);
     res.status(201);
     res.send({ data: exercise, error: null });
   } catch (error) {
@@ -39,14 +28,9 @@ const deleteExercise = async function (req, res) {
 };
 
 const updateExercise = async function (req, res) {
-  const { id, userId } = req.params;
-  const { name, isWeighted, isTimed } = req.body;
+  const { id } = req.params;
   try {
-
-    const exercise = await prisma.exercise.update({
-      where: { id: parseInt(id) },
-      data: { name, isWeighted, isTimed },
-    });
+    const exercise = await rewriteExercise(id, req.body);
     res.status(201);
     res.send({ data: exercise, error: null });
   } catch (error) {
@@ -59,9 +43,7 @@ const updateExercise = async function (req, res) {
 const getExercisesByUser = async function (req, res) {
   const { userId } = req.params;
   try {
-    const exercises = await prisma.exercise.findMany({
-      where: { UserId: parseInt(userId) },
-    });
+    const exercises = readAllExercises(userId);
     res.status(201);
     res.send({ data: exercises, error: null });
   } catch (error) {

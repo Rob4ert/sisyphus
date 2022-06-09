@@ -1,7 +1,7 @@
 const { prisma } = require('../db');
 
 const createRoutine = async function (req, res) {
-  const { userId } = req.params;
+  const { userId } = req.session.uid;
   const { days, name } = req.body;
   try {
     const routine = await prisma.routine.create({
@@ -28,7 +28,7 @@ const createRoutine = async function (req, res) {
 };
 
 const deleteRoutine = async function (req, res) {
-  const { id, userId } = req.params;
+  const { id } = req.params;
   try {
     const routine = await prisma.routine.delete({
       where: {
@@ -45,7 +45,7 @@ const deleteRoutine = async function (req, res) {
 };
 
 const updateRoutine = async function (req, res) {
-  const { id, userId } = req.params;
+  const { id } = req.params;
   const routine = req.body;
   try {
     const newRoutine = await prisma.routine.update({
@@ -62,7 +62,7 @@ const updateRoutine = async function (req, res) {
 };
 
 const getRoutinesByUser = async function (req, res) {
-  const { userId } = req.params;
+  const { userId } = req.session.uid;
   try {
     const routines = await prisma.routine.findMany({
       where: { UserId: parseInt(userId) },

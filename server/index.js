@@ -16,7 +16,7 @@ const app = new Express();
 app.use(cors(corsConfig));
 app.set('trust proxy', 1); // trust first proxy
 app.use(session({
-  name: 'sid',
+  name: 'sessionId',
   secret: process.env.COOKIE_SECRET,
   resave: false,
   saveUninitialized: false,
