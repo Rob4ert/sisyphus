@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { APIClientService } from '../api-client.service';
 import { User } from '../interfaces';
 import { UserService } from '../user.service';
 import { AppRoutingModule } from '../app-routing.module';
+import { NotificationsService } from '../notifications.service';
 
 @Component({
   selector: 'app-signup-card',
@@ -24,8 +24,8 @@ export class SignupCardComponent implements OnInit {
   constructor(
     private route: AppRoutingModule,
     private http: APIClientService,
-    private snackBar: MatSnackBar,
     private userService: UserService,
+    private notification: NotificationsService,
   ) { }
 
 
@@ -64,10 +64,8 @@ export class SignupCardComponent implements OnInit {
       this.http.createUser(user).subscribe((newUser) => {
         this.signup.reset();
         this.userService.updateUser(newUser);
-        this.snackBar.open(`Your account has been created!`, 'Dismiss', {
-          duration: 2000,
-        });
-        this.route.sendTo('login');
+        this.notification.createNotification(`Your account has been created!`);
+        this.route.sendTo('dashboard');
       });
     }
   }

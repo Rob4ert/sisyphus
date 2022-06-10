@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { APIClientService } from '../api-client.service';
 import { AppRoutingModule } from '../app-routing.module';
 import { User } from '../interfaces';
+import { NotificationsService } from '../notifications.service';
 import { UserService } from '../user.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class LoginCardComponent implements OnInit {
   constructor(
     private route: AppRoutingModule,
     private http: APIClientService,
-    private snackBar: MatSnackBar,
+    private notification: NotificationsService,
     private userService: UserService
   ) { }
 
@@ -49,9 +49,7 @@ export class LoginCardComponent implements OnInit {
       this.http.loginUser(user).subscribe((user) => {
         this.login.reset();
         this.userService.updateUser(user);
-        this.snackBar.open(`Welcome back, ${user.name}!`, 'Dismiss', {
-          duration: 2000,
-        });
+        this.notification.createNotification(`Welcome back, ${user.name}!`);
         this.route.sendTo('dashboard');
       });
     }
