@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupCardComponent } from './signup-card/signup-card.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './material.module';
 import { CustomErrorInterceptor } from './custom-error-interceptor';
 import { LoginCardComponent } from './login-card/login-card.component';
@@ -31,9 +31,10 @@ import { CreateRutineComponent } from './create-rutine/create-rutine.component';
     BrowserAnimationsModule,
     LayoutModule,
     ReactiveFormsModule,
-    FormsModule,
     AngularMaterialModule,
     HttpClientModule,
+
+
 
 
   ],
