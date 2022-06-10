@@ -17,10 +17,12 @@ export class CustomErrorInterceptor implements ErrorHandler {
       // A client-side or network error occurred. Handle it accordingly.
       message = error.error;
     } else if (error.status === 409) {
+      console.log('error :>> ', error);
       message = 'Email already in use.';
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
+      message = '';
       console.error(`Backend returned code ${error.status}, body was: `, error.error);
     }
     // Return a snackBar with a user-facing error message.

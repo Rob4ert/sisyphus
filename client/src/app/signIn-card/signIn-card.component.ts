@@ -16,6 +16,10 @@ export class SignInCardComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.min(6), Validators.max(20)]),
     repeatPassword: new FormControl('', [Validators.required, Validators.min(6), Validators.max(20)]),
   });
+
+  public isLogging: boolean = true;
+  public passwordMatch: boolean = true;
+
   constructor(private http: APIClientService, private snackBar: MatSnackBar) { }
 
 
@@ -26,23 +30,34 @@ export class SignInCardComponent implements OnInit {
     return this.signIn.get('email')?.hasError('email') ? 'Not a valid email' : '';
   }
 
+  checkPassword() {
+    this.passwordMatch = this.signIn.get('password')?.value === this.signIn.get('repeatPassword')?.value ? true : false;
+  }
+
   getPasswordError() {
     if (this.signIn.get('password')?.hasError('required')) {
       return 'You must enter a value';
-    } else if (this.signIn.get('password') !== this.signIn.get('repeatPassword')) {
+    } else if (this.signIn.get('password')?.value !== this.signIn.get('repeatPassword')?.value) {
       return 'password do not match!';
     }
     return '';
   }
-  handleSubmit(event: User) {
-    delete event.passwordRepeat;
-    this.http.createUser(event).subscribe(() => {
-      this.signIn.reset();
-      this.snackBar.open(`Your account has been created!`, 'Dismiss', {
-        duration: 2000,
-      });
-    });
 
+  isLoggingToggler() {
+    this.isLogging = !this.isLogging;
+  }
+
+  handleSubmit(event: User) {
+    this.checkPassword();
+    if (this.signIn.valid && this.signIn.get('password')?.value === this.signIn.get('repeatPassword')?.value) {
+      delete event.passwordRepeat;
+      this.http.createUser(event).subscribe((user) => {
+        this.signIn.reset();
+        this.snackBar.open(`Your account has been created!`, 'Dismiss', {
+          duration: 2000,
+        });
+      });
+    }
   }
 
   ngOnInit(): void {

@@ -6,7 +6,8 @@
 
 }
 
-mat-card mat-card-content {
+mat-card mat-card-content,
+form {
   padding: 5%;
   display: flex;
   flex-direction: column;

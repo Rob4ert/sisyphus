@@ -36,12 +36,13 @@ const createUser = async function (req, res) {
       req.session.regenerate(() => {
         return req.session.uid = newUser.id;
       });
+      delete newUser.password;
       res.status(201);
-      res.send();
+      res.send({ error: null, data: newUser });
     } catch (error) {
       if (error.meta?.target[0] === 'email') {
         res.status(409);
-        res.send('email already in use');
+        res.send({ error: "Email already in use.", data: null });
       } else {
         res.status(503);
         res.send();

@@ -17,8 +17,8 @@ export class APIClientService {
 
 
   constructor(private http: HttpClient) { }
-  createUser(user: User): Observable<string> {
-    return this.http.post<string>(url, user, {
+  createUser(user: User): Observable<User> {
+    return this.http.post<User>(url, user, {
       withCredentials: true,
     });
   }
