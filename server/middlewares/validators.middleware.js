@@ -21,8 +21,6 @@ const signInConfig = [
 
   check("repeatPassword").custom((value, { req }) => {
     if (value !== req.body.password) {
-      console.log('value :>> ', value);
-      console.log(req.body.password, req.body.repeatPassword);
       throw new Error("Passwords does not match.");
     }
     return true;

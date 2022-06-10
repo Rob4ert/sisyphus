@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { APIClientService } from '../api-client.service';
 import { User } from '../interfaces';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login-card',
@@ -18,7 +19,7 @@ export class LoginCardComponent implements OnInit {
 
 
 
-  constructor(private http: APIClientService, private snackBar: MatSnackBar) { }
+  constructor(private http: APIClientService, private snackBar: MatSnackBar, private userService: UserService) { }
 
 
   getErrorMessage() {
@@ -41,6 +42,7 @@ export class LoginCardComponent implements OnInit {
     if (this.login.valid) {
       this.http.loginUser(user).subscribe((user) => {
         this.login.reset();
+        this.userService.updateUser(user);
         this.snackBar.open(`Welcome back, ${user.name}!`, 'Dismiss', {
           duration: 2000,
         });

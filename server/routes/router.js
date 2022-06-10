@@ -9,7 +9,7 @@ const { signInValidator, signInConfig, logInConfig, logInValidator } = require('
 const router = new Router();
 
 // users
-router.post('/', signInConfig, signInValidator, createUser);
+router.post('/', createUser);
 router.post('/login', logInConfig, logInValidator, login);
 router.get('/login', getUser);
 router.post('/logout', checkLoggedIn, logout);

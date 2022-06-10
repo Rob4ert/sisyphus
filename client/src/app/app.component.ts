@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { APIClientService } from './api-client.service';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,8 @@ import { APIClientService } from './api-client.service';
 })
 export class AppComponent {
   title = 'sisyphus';
-  constructor(private http: APIClientService,) { }
+  constructor(private http: APIClientService, private userService: UserService,) { }
   ngOnInit(): void {
-    this.http.getUser().subscribe(res => console.log('res :>> ', res));
+    this.http.getUser().subscribe(user => this.userService.updateUser(user));
   }
 }
