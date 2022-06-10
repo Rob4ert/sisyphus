@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 
-const { findUser, writeUser } = require('../models/user.model');
+const { findUser, writeUser, findUserById } = require('../models/user.model');
 
 const saltRounds = 10;
 
@@ -28,6 +28,19 @@ const login = async (req, res) => {
       res.status(400);
       res.send({ error: 'wrong email or password.', data: null });
     }
+  }
+};
+
+const getUser = async function (req, res) {
+  const id = req.session.uid;
+  try {
+    const user = await findUserById(id);
+    delete user.password;
+    res.status(201);
+    res.send({ error: null, data: user });
+  } catch (error) {
+    res.status(401);
+    res.send(error);
   }
 };
 
@@ -65,7 +78,7 @@ const logout = (req, res) => {
 
 
 module.exports = {
-  createUser, login, logout
+  createUser, login, logout, getUser
 };
 
 

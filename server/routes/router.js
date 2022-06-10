@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { checkLoggedIn, checkIsUser } = require('../middlewares/auth.middleware');
-const { createUser, login, logout } = require('../controllers/user.controller');
+const { createUser, login, logout, getUser } = require('../controllers/user.controller');
 const { createExercise, deleteExercise, updateExercise, getExercisesByUser } = require('../controllers/exercise.controller');
 const { createRoutine, deleteRoutine, updateRoutine, getRoutinesByUser } = require('../controllers/routine.controller');
 const { createSet, deleteSet, updateSet, getSetsByDay } = require('../controllers/set.controller');
@@ -11,6 +11,7 @@ const router = new Router();
 // users
 router.post('/', signInConfig, signInValidator, createUser);
 router.post('/login', logInConfig, logInValidator, login);
+router.get('/login', getUser);
 router.post('/logout', checkLoggedIn, logout);
 
 // exercises

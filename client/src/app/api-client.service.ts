@@ -23,6 +23,15 @@ export class APIClientService {
     }));
   }
 
+  getUser(): Observable<User> {
+    return this.http.get<ApiResponse>(`${url}/login`, {
+      withCredentials: true,
+    }).pipe(map(response => {
+      return response.data;
+    }));
+  }
+
+
   loginUser(user: User): Observable<User> {
     return this.http.post<ApiResponse>(`${url}/login`, user, {
       withCredentials: true,
