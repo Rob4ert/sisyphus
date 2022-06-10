@@ -7,22 +7,27 @@ const saltRounds = 10;
 
 const login = async (req, res) => {
   const { password, email } = req.body;
-  const user = await findUser(email);
-  if (user && bcrypt.compareSync(password, user.password)) {
-    req.session.regenerate(() => {
-      req.session.uid = user.id;
-      req.session.save(function (err) {
-        if (err) return next(err);
-        res.status(201);
-        res.send('you are logged in');
+  if (!password || !email) {
+    res.status(400);
+    res.send({ error: 'Missing password or email.', data: null });
+  } else {
+    const user = await findUser(email);
+    if (user && bcrypt.compareSync(password, user.password)) {
+      req.session.regenerate(() => {
+        req.session.uid = user.id;
+        req.session.save(function (err) {
+          if (err) return next(err);
+          delete user.password;
+          res.status(201);
+          res.send({ error: null, data: user });
+        }
+        );
       }
       );
+    } else {
+      res.status(400);
+      res.send({ error: 'wrong email or password.', data: null });
     }
-    );
-
-  } else {
-    res.status(401);
-    res.send('wrong email or password');
   }
 };
 

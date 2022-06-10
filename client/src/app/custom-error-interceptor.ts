@@ -15,10 +15,11 @@ export class CustomErrorInterceptor implements ErrorHandler {
     let message = '';
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
-      message = error.error;
+      message = error.error.error;
+    } else if (error.status === 400) {
+      message = error.error.error;
     } else if (error.status === 409) {
-      console.log('error :>> ', error);
-      message = 'Email already in use.';
+      message = error.error.error;
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.

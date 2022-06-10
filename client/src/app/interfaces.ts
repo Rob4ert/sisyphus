@@ -1,11 +1,16 @@
 export interface User {
   id: string,
-  name: string,
+  name?: string,
   email: String,
   password: string,
-  passwordRepeat?: string,
+  repeatPassword?: string,
   routines: any[],
   exercise: any[],
+}
+
+export interface ApiResponse {
+  data: User;
+  error: string;
 }
 
 // model User {

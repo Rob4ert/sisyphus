@@ -9,7 +9,7 @@
           <input type="email" matInput placeholder="Enter your email" formControlName="email" required>
           <mat-error *ngIf="signIn.get('email')?.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field *ngIf='!isLogging' appearance="fill">
           <mat-label>Name</mat-label>
           <input type="text" matInput placeholder="Enter your name" formControlName="name" required>
           <mat-error *ngIf="signIn.get('name')?.invalid">Invalid Name!</mat-error>
@@ -23,7 +23,6 @@
           <mat-label>password</mat-label>
           <input type="password" matInput placeholder="repeat password" formControlName="repeatPassword" required>
           <mat-error *ngIf="!passwordMatch">Passwords should match.</mat-error>
-          <p>{{passwordMatch}}</p>
         </mat-form-field>
 
         <button *ngIf='!isLogging' mat-raised-button color="primary">Sign in!</button>

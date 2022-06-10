@@ -48,10 +48,33 @@ export class SignInCardComponent implements OnInit {
   }
 
   handleSubmit(event: User) {
+
+    if (this.isLogging) {
+      this.LoginUser(event);
+    } else {
+      this.signInUser(event);
+    }
+
+  }
+
+  LoginUser(user: User) {
+    delete user.repeatPassword;
+    delete user.name;
+    if (!this.signIn.get('email')?.hasError('required') || !this.signIn.get('password')?.hasError('required')) {
+      this.http.loginUser(user).subscribe((user) => {
+        this.signIn.reset();
+        this.snackBar.open(`Welcome back, ${user.name}!`, 'Dismiss', {
+          duration: 2000,
+        });
+      });
+    }
+  }
+
+  signInUser(user: User) {
     this.checkPassword();
     if (this.signIn.valid && this.signIn.get('password')?.value === this.signIn.get('repeatPassword')?.value) {
-      delete event.passwordRepeat;
-      this.http.createUser(event).subscribe((user) => {
+      delete user.repeatPassword;
+      this.http.createUser(user).subscribe(() => {
         this.signIn.reset();
         this.snackBar.open(`Your account has been created!`, 'Dismiss', {
           duration: 2000,
