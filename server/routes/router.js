@@ -4,12 +4,13 @@ const { createUser, login, logout } = require('../controllers/user.controller');
 const { createExercise, deleteExercise, updateExercise, getExercisesByUser } = require('../controllers/exercise.controller');
 const { createRoutine, deleteRoutine, updateRoutine, getRoutinesByUser } = require('../controllers/routine.controller');
 const { createSet, deleteSet, updateSet, getSetsByDay } = require('../controllers/set.controller');
+const { signInValidator, signInConfig, logInConfig, logInValidator } = require('../middlewares/validators.middleware');
 
 const router = new Router();
 
 // users
-router.post('/', createUser);
-router.post('/login', login);
+router.post('/', signInConfig, signInValidator, createUser);
+router.post('/login', logInConfig, logInValidator, login);
 router.post('/logout', checkLoggedIn, logout);
 
 // exercises

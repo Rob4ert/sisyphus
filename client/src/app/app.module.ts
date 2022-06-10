@@ -4,20 +4,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SignInCardComponent } from './signIn-card/signIn-card.component';
+import { SignupCardComponent } from './signup-card/signup-card.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './material.module';
 import { CustomErrorInterceptor } from './custom-error-interceptor';
+import { LoginCardComponent } from './login-card/login-card.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignInCardComponent,
-    NavBarComponent
+    SignupCardComponent,
+    NavBarComponent,
+    LoginCardComponent
   ],
   imports: [
     BrowserModule,
