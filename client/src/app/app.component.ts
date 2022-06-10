@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { APIClientService } from './api-client.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'sisyphus';
-
+  constructor(private http: APIClientService,) { }
   ngOnInit(): void {
+    this.http.getUser().subscribe(res => console.log('res :>> ', res));
   }
 }

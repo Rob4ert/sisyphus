@@ -1,5 +1,6 @@
 import { ErrorHandler, Injectable, NgZone } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 export class CustomErrorInterceptor implements ErrorHandler {
 
-  constructor(public snackBar: MatSnackBar, private zone: NgZone,) { }
+  constructor(public snackBar: MatSnackBar, private zone: NgZone, private router: Router) { }
 
   handleError(error: any): void {
     console.log('error :>> ', error);
@@ -19,7 +20,7 @@ export class CustomErrorInterceptor implements ErrorHandler {
     } else if (error.status === 400) {
       message = error.error.error;
     } else if (error.status === 401) {
-      message = error.error.error;
+      this.router.navigate(['/login']);
     } else if (error.status === 409) {
       message = error.error.error;
     } else {

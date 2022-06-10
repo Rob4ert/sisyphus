@@ -40,7 +40,7 @@ const getUser = async function (req, res) {
     res.send({ error: null, data: user });
   } catch (error) {
     res.status(401);
-    res.send(error);
+    res.send({ error: "You are not logged in.", data: null });
   }
 };
 
