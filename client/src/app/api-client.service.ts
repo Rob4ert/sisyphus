@@ -30,5 +30,12 @@ export class APIClientService {
       return response.data;
     }));
   }
+  logoutUser(): Observable<User> {
+    return this.http.post<ApiResponse>(`${url}/logout`, 'logout', {
+      withCredentials: true,
+    }).pipe(map(response => {
+      return response.data;
+    }));
+  }
 
 }

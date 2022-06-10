@@ -6,7 +6,7 @@ const checkLoggedIn = async function (req, res, next) {
   if (req.session.uid) next();
   else {
     res.status(401);
-    res.send('you are not logged in!');
+    res.send({ error: 'you are not logged in!', data: null });
   }
 };
 
@@ -16,7 +16,7 @@ const checkIsUser = async function (req, res, next) {
   if (userDb.id === parseInt(req.params.userId)) next();
   else {
     res.status(401);
-    res.send('you are not allowed!');
+    res.send({ error: "you are not allowed!.", data: null });
   }
 };
 

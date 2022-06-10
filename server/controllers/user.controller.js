@@ -60,7 +60,7 @@ const logout = (req, res) => {
   req.session.destroy();
   res.clearCookie('sessionId');
   res.status(201);
-  res.send('you are logged out!');
+  res.send({ error: "You are logged out.", data: null });
 };
 
 
