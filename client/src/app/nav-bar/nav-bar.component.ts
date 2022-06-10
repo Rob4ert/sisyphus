@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { UserService } from "../user.service";
 import { APIClientService } from '../api-client.service';
 import { User } from '../interfaces';
+import { AppRoutingModule } from '../app-routing.module';
 
 @Component({
   selector: 'app-nav-bar',
@@ -23,14 +24,20 @@ export class NavBarComponent {
   user: User | null = null;
   subscription: Subscription | undefined;
 
-  constructor(private breakpointObserver: BreakpointObserver, private http: APIClientService, private userService: UserService) { }
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private http: APIClientService,
+    private userService: UserService,
+    private route: AppRoutingModule,
+  ) { }
 
   logoutHandler() {
-    this.http.logoutUser().subscribe((res) => console.log('response :>> ', res));
+    this.http.logoutUser().subscribe(() => {
+      this.route.sendTo('login');
+    });
   }
   ngOnInit() {
     this.subscription = this.userService.currentUser.subscribe(user => {
-      console.log('user :>> ', user);
       this.user = user;
     });
   }

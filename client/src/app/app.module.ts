@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './material.module';
 import { CustomErrorInterceptor } from './custom-error-interceptor';
 import { LoginCardComponent } from './login-card/login-card.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
@@ -19,7 +20,8 @@ import { LoginCardComponent } from './login-card/login-card.component';
     AppComponent,
     SignupCardComponent,
     NavBarComponent,
-    LoginCardComponent
+    LoginCardComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

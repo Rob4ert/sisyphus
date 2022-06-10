@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { APIClientService } from '../api-client.service';
+import { AppRoutingModule } from '../app-routing.module';
 import { User } from '../interfaces';
 import { UserService } from '../user.service';
 
@@ -19,7 +20,12 @@ export class LoginCardComponent implements OnInit {
 
 
 
-  constructor(private http: APIClientService, private snackBar: MatSnackBar, private userService: UserService) { }
+  constructor(
+    private route: AppRoutingModule,
+    private http: APIClientService,
+    private snackBar: MatSnackBar,
+    private userService: UserService
+  ) { }
 
 
   getErrorMessage() {
@@ -46,6 +52,7 @@ export class LoginCardComponent implements OnInit {
         this.snackBar.open(`Welcome back, ${user.name}!`, 'Dismiss', {
           duration: 2000,
         });
+        this.route.sendTo('dashboard');
       });
     }
   }

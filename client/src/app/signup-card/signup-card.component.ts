@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { APIClientService } from '../api-client.service';
 import { User } from '../interfaces';
+import { UserService } from '../user.service';
+import { AppRoutingModule } from '../app-routing.module';
 
 @Component({
   selector: 'app-signup-card',
@@ -19,7 +21,12 @@ export class SignupCardComponent implements OnInit {
 
   public isLogging: boolean = true;
 
-  constructor(private http: APIClientService, private snackBar: MatSnackBar) { }
+  constructor(
+    private route: AppRoutingModule,
+    private http: APIClientService,
+    private snackBar: MatSnackBar,
+    private userService: UserService,
+  ) { }
 
 
   getErrorMessage() {
@@ -54,11 +61,13 @@ export class SignupCardComponent implements OnInit {
     this.AreMatching();
     if (this.signup.valid && this.signup.get('password')?.value === this.signup.get('repeatPassword')?.value) {
       delete user.repeatPassword;
-      this.http.createUser(user).subscribe(() => {
+      this.http.createUser(user).subscribe((newUser) => {
         this.signup.reset();
+        this.userService.updateUser(newUser);
         this.snackBar.open(`Your account has been created!`, 'Dismiss', {
           duration: 2000,
         });
+        this.route.sendTo('login');
       });
     }
   }
