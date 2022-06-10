@@ -12,6 +12,7 @@ import { AngularMaterialModule } from './material.module';
 import { CustomErrorInterceptor } from './custom-error-interceptor';
 import { LoginCardComponent } from './login-card/login-card.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CreateRutineComponent } from './create-rutine/create-rutine.component';
 
 
 
@@ -21,7 +22,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SignupCardComponent,
     NavBarComponent,
     LoginCardComponent,
-    DashboardComponent
+    DashboardComponent,
+    CreateRutineComponent
   ],
   imports: [
     BrowserModule,

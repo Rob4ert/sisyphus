@@ -20,6 +20,7 @@ export class CustomErrorInterceptor implements ErrorHandler {
     } else if (error.status === 400) {
       message = error.error.error;
     } else if (error.status === 401) {
+      message = error.error.error;
       this.router.navigate(['/login']);
     } else if (error.status === 409) {
       message = error.error.error;

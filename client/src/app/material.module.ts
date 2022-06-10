@@ -18,7 +18,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { MatStepperModule } from '@angular/material/stepper';
 @NgModule({
   imports: [
     CommonModule,
@@ -41,6 +41,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatPaginatorModule,
     MatSnackBarModule,
     MatGridListModule,
+    MatStepperModule
+
   ],
   exports: [
     MatButtonModule,
@@ -61,6 +63,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatPaginatorModule,
     MatSnackBarModule,
     MatGridListModule,
+    MatStepperModule
   ],
   providers: [
     MatDatepickerModule,
