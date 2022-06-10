@@ -22,7 +22,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     secure: false, // should be true when deploy
-    sameSite: true,
+    sameSite: 'lax',
     httpOnly: false, // should be true when deploy
   }
 }));
