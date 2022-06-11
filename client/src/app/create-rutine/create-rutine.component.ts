@@ -8,31 +8,25 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./create-rutine.component.css']
 })
 export class CreateRutineComponent implements OnInit {
-
-
-  public userForm: FormGroup;
-  // this.formBuilder.group({
-
-  //   days:this.formBuilder.array([this.addDaysGroup()])
-  // });
-
-  firstFormGroup = this.formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
-
-
-  secondFormGroup = this.formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
   isLinear = false;
 
+  public rutine: any = {};
+
+  public firstFormGroup = this.formBuilder.group({
+    rutineName: [],
+    days: this.formBuilder.array([this.addDaysGroup()])
+  });
+
+
+  public secondFormGroup = this.formBuilder.group({
+    exercises: this.formBuilder.array([this.addExercisesGroup()])
+  });
+
+
   constructor(private formBuilder: FormBuilder) {
-    this.userForm = this.formBuilder.group({
-      Name: [],
-      days: this.formBuilder.array([this.addDaysGroup()])
-    });
 
   }
+
   ngOnInit(): void {
   }
 
@@ -40,11 +34,11 @@ export class CreateRutineComponent implements OnInit {
   private addDaysGroup(): FormGroup {
     return this.formBuilder.group({
       dayName: [],
-      exercises: this.formBuilder.array([])
+      // exercises: this.formBuilder.array([])
     });
   }
 
-  private exercisesGroup(): FormGroup {
+  private addExercisesGroup(): FormGroup {
     return this.formBuilder.group({
       exerciseName: [],
       // reps: ['1313', [Validators.maxLength(10)]],
@@ -54,21 +48,45 @@ export class CreateRutineComponent implements OnInit {
 
   addDay() {
     this.daysArray.push(this.addDaysGroup());
-
   }
+
+  addExercise() {
+    this.exercisesArray.push(this.addExercisesGroup());
+  }
+
   deleteDay(dayIndex: number) {
     this.daysArray.removeAt(dayIndex);
   }
 
-  get daysArray(): FormArray {
-    return <FormArray>this.userForm.get('days');
+  deleteExercise(dayIndex: number) {
+    this.exercisesArray.removeAt(dayIndex);
   }
 
-  addExercise(index: number): void {
-    console.log('daysArray() :>> ', this.daysArray);
-    console.log('this.daysArray.controls[index]).controls :>> ', (<FormGroup>this.daysArray.controls[index]).get('exercises'));
-    (<FormArray>(<FormGroup>this.daysArray.at(index)).get('exercises')).push(this.exercisesGroup());
+
+  get daysArray(): FormArray {
+    return <FormArray>this.firstFormGroup.get('days');
   }
+  get exercisesArray(): FormArray {
+    return <FormArray>this.secondFormGroup.get('exercises');
+  }
+
+
+  check() {
+    this.rutine = this.firstFormGroup.value;
+    console.log('daysArray.value :>> ', this.rutine);
+  }
+
+
+  // getControls(day: any): any {
+  //   console.log('object :>> ', (day.get('exercises') as FormArray));
+  //   return (day.get('exercises') as FormArray).controls;
+  // }
+
+  // addExercise(index: number): void {
+  //   console.log('daysArray :>> ', this.daysArray);
+
+  //   (<FormArray>(<FormGroup>this.daysArray.at(index)).get('exercises')).push(this.exercisesGroup());
+  // }
 
 
 
