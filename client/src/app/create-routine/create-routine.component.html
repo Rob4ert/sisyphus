@@ -73,7 +73,7 @@
     <ng-template matStepLabel>Review</ng-template>
     <h2><strong> {{firstFormGroup.value.routineName}} </strong></h2>
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let day of this.routineForm.value.days">
+      <mat-expansion-panel *ngFor="let day of routineForm.value.days">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{day.dayName}}

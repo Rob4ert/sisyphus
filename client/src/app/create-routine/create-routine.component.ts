@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { APIClientService } from '../api-client.service';
+import { User } from '../interfaces';
+import { UserService } from '../user.service';
 
 
 @Component({
@@ -10,7 +14,10 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CreateRoutineComponent implements OnInit {
 
 
-  public routine: any = {};
+  user: User | null = null;
+  subscription: Subscription | undefined;
+
+
 
   public firstFormGroup = this.fb.group({
     routineName: '',
@@ -22,10 +29,16 @@ export class CreateRoutineComponent implements OnInit {
     days: this.fb.array([])
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private http: APIClientService,
+    private userService: UserService,
+  ) { }
 
   ngOnInit() {
-
+    this.subscription = this.userService.currentUser.subscribe(user => {
+      this.user = user;
+    });
   }
 
   days(): FormArray {
@@ -71,6 +84,11 @@ export class CreateRoutineComponent implements OnInit {
   }
 
   onSubmit() {
+    const newRoutine = {
+      name: this.firstFormGroup.value.routineName,
+      days: this.routineForm.value.days,
+    };
+    console.log('newRoutine :>> ', newRoutine);
     console.log('this.firstFormGroup.value :>> ', this.firstFormGroup.value);
     console.log(this.routineForm.value);
   }

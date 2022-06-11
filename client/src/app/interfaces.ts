@@ -5,13 +5,20 @@ export interface User {
   password: string,
   repeatPassword?: string,
   routines: any[],
-  exercise: any[],
+  exercise: Routine[],
 }
 
 export interface ApiResponse {
   data: User;
   error: string;
 }
+
+export interface Routine {
+  id?: string,
+  name: string,
+  days: any[],
+}
+
 
 // model User {
 //   id        Int @id @default (autoincrement())
