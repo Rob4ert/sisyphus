@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { filter, map, Observable } from 'rxjs';
-import { User, ApiResponse, Routine } from './interfaces';
+import { map, Observable } from 'rxjs';
+import { User, Routine, ApiResponseRoutine, ApiResponseUser } from './interfaces';
 
 
 
@@ -16,7 +16,7 @@ export class APIClientService {
   constructor(private http: HttpClient) { }
   // user handling requests
   createUser(user: User): Observable<User> {
-    return this.http.post<ApiResponse>(url, user, {
+    return this.http.post<ApiResponseUser>(url, user, {
       withCredentials: true,
     }).pipe(map(response => {
       return response.data;
@@ -24,7 +24,7 @@ export class APIClientService {
   }
 
   getUser(): Observable<User> {
-    return this.http.get<ApiResponse>(`${url}/login`, {
+    return this.http.get<ApiResponseUser>(`${url}/login`, {
       withCredentials: true,
     }).pipe(map(response => {
       return response.data;
@@ -33,14 +33,14 @@ export class APIClientService {
 
 
   loginUser(user: User): Observable<User> {
-    return this.http.post<ApiResponse>(`${url}/login`, user, {
+    return this.http.post<ApiResponseUser>(`${url}/login`, user, {
       withCredentials: true,
     }).pipe(map(response => {
       return response.data;
     }));
   }
   logoutUser(): Observable<User> {
-    return this.http.post<ApiResponse>(`${url}/logout`, 'logout', {
+    return this.http.post<ApiResponseUser>(`${url}/logout`, 'logout', {
       withCredentials: true,
     }).pipe(map(response => {
       return response.data;
@@ -50,7 +50,7 @@ export class APIClientService {
   // routine handling requests
 
   SaveRoutine(routine: Routine) {
-    return this.http.post<ApiResponse>(`${url}/routine`, routine, {
+    return this.http.post<ApiResponseRoutine>(`${url}/routine`, routine, {
       withCredentials: true,
     }).pipe(map(response => {
       return response.data;

@@ -1,3 +1,4 @@
+
 export interface User {
   id: string,
   name?: string,
@@ -8,8 +9,13 @@ export interface User {
   exercise: Routine[],
 }
 
-export interface ApiResponse {
+export interface ApiResponseUser {
   data: User;
+  error: string;
+}
+
+export interface ApiResponseRoutine {
+  data: Routine;
   error: string;
 }
 

@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { APIClientService } from '../api-client.service';
 import { User } from '../interfaces';
+import { NotificationsService } from '../notifications.service';
 import { UserService } from '../user.service';
 
 
@@ -12,11 +13,6 @@ import { UserService } from '../user.service';
   styleUrls: ['./create-routine.component.css']
 })
 export class CreateRoutineComponent implements OnInit {
-
-
-  user: User | null = null;
-  subscription: Subscription | undefined;
-
 
 
   public firstFormGroup = this.fb.group({
@@ -32,13 +28,10 @@ export class CreateRoutineComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: APIClientService,
-    private userService: UserService,
+    private notification: NotificationsService,
   ) { }
 
   ngOnInit() {
-    this.subscription = this.userService.currentUser.subscribe(user => {
-      this.user = user;
-    });
   }
 
   days(): FormArray {
@@ -88,10 +81,10 @@ export class CreateRoutineComponent implements OnInit {
       routineName: this.firstFormGroup.value.routineName,
       days: this.routineForm.value.days,
     };
-    this.http.SaveRoutine(routine).subscribe((res) => console.log('res :>> ', res));
-    console.log('newRoutine :>> ', routine);
-    console.log('this.firstFormGroup.value :>> ', this.firstFormGroup.value);
-    console.log(this.routineForm.value);
+    this.http.SaveRoutine(routine)
+      .subscribe((res) => {
+        this.notification.createNotification(`New Routine: ${res.routineName}, created!`);
+      });
   }
 
 }
