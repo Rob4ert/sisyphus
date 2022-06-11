@@ -5,66 +5,59 @@
   <!-- first step includes name and days -->
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Name you routine</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Name your rutine." formControlName="rutineName" required>
-      </mat-form-field>
+      <ng-template matStepLabel>Name your rutine</ng-template>
 
-      <!-- days form -->
-      <div class="days-container">
-        <ng-container *ngFor="let day of daysArray.controls; let i = index" formArrayName="days">
-          <div [formGroupName]="i">
-            <mat-form-field appearance="fill">
-              <input matInput formControlName="dayName" placeholder="Day">
-            </mat-form-field>
-            <!-- day controls -->
-            <button mat-icon-button color="warn">
-              <mat-icon class="delete-btn" (click)="deleteDay(i)">
-                delete_forever</mat-icon>
-            </button>
-          </div>
-        </ng-container>
-        <button mat-icon-button color="primary" (click)="addDay()">
-          <mat-icon>add</mat-icon> Add a new day
-        </button>
-      </div>
-      <div>
-        <button mat-button matStepperNext (click)="check()">Next</button>
-      </div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+
     </form>
   </mat-step>
 
   <!-- second step add exercises to each day  -->
 
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Add Exercises</ng-template>
-      <!-- exercise form -->
-      <div class="exercises-container">
-        <ng-container *ngFor="let exercise of exercisesArray.controls; let idx = index;" formArrayName='exercises'>
-          <div [formGroupName]="idx">
-            <mat-form-field appearance="fill">
-              <input matInput formControlName="exerciseName" placeholder="exercise">
+
+  <mat-step [stepControl]="rutineForm">
+    <form [formGroup]="rutineForm">
+      <div formArrayName="days">
+        <div *ngFor="let day of days().controls; let dayIndex=index">
+          <div [formGroupName]="dayIndex">
+            <mat-form-field appearance="standard">
+              <mat-label>Name your day</mat-label>
+              <input matInput type="text" formControlName="firstName" placeholder="Day name">
             </mat-form-field>
-            <button mat-icon-button color="warn">
-              <mat-icon class="delete-btn" (click)="deleteExercise(idx)">
-                delete_forever</mat-icon>
+
+            <button mat-icon-button (click)="removeDay(dayIndex)">
+              <mat-icon matSuffix color="warn" (click)="removeDay(dayIndex)">delete</mat-icon>
+            </button>
+
+            <div formArrayName="exercises">
+              <div *ngFor="let skill of exercises(dayIndex).controls; let exerciseIndex=index">
+                <div [formGroupName]="exerciseIndex">
+                  {{exerciseIndex}} Skill :
+                  <mat-form-field appearance="standard">
+                    <mat-label>Name your exercise</mat-label>
+                    <input matInput type="text" formControlName="exerciseName" placeholder="Exercise Name">
+                  </mat-form-field>
+                  <button mat-icon-button (click)="removeDay(dayIndex)">
+                    <mat-icon matSuffix color="warn" (click)="removeExercise(dayIndex,exerciseIndex)">delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <button type="button" (click)="addExercise(dayIndex)">
+              Add Skill
             </button>
           </div>
-
-        </ng-container>
-        <!-- exercise controls -->
-        <button mat-icon-button color="primary" (click)="addExercise()">
-          <mat-icon>add</mat-icon> Add a new exercise
+        </div>
+        <button mat-icon-button color="primary" (click)="addDay()">
+          <mat-icon>add</mat-icon> Add a new day
         </button>
       </div>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext (click)="check()">Next</button>
-      </div>
+      <button (click)="onSubmit()">submit</button>
     </form>
   </mat-step>
+
+
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>
