@@ -5,3 +5,11 @@
 .mat-form-field {
   margin-top: 16px;
 }
+
+button {
+  margin-left: 5px;
+}
+
+mat-divider {
+  margin: 10px;
+}

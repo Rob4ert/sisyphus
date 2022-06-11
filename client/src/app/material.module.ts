@@ -19,6 +19,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatPaginatorModule,
     MatSnackBarModule,
     MatGridListModule,
-    MatStepperModule
+    MatStepperModule,
+    MatExpansionModule
 
   ],
   exports: [
@@ -63,7 +66,9 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatPaginatorModule,
     MatSnackBarModule,
     MatGridListModule,
-    MatStepperModule
+    MatStepperModule,
+    MatExpansionModule
+
   ],
   providers: [
     MatDatepickerModule,

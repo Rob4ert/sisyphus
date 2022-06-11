@@ -1,0 +1,100 @@
+<mat-stepper orientation="vertical" linear="false" #stepper>
+  <!-- first step  add a name -->
+  <mat-step [stepControl]="firstFormGroup">
+    <ng-template matStepLabel>Name your routine</ng-template>
+    <form [formGroup]="firstFormGroup">
+      <mat-form-field appearance="outline">
+        <mat-label>Name your routine</mat-label>
+        <input matInput type="text" formControlName="routineName" placeholder="Routine Name">
+      </mat-form-field>
+    </form>
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button matStepperNext>Next</button>
+  </mat-step>
+
+  <!-- second step add exercises to each day  -->
+
+
+  <mat-step [stepControl]="routineForm">
+    <ng-template matStepLabel>Add Exercises</ng-template>
+    <form [formGroup]="routineForm">
+      <div formArrayName="days">
+        <div *ngFor="let day of days().controls; let dayIndex=index">
+          <div class="day-container" [formGroupName]="dayIndex">
+            <mat-form-field appearance="outline">
+              <mat-label>Name your day</mat-label>
+              <input matInput type="text" formControlName="dayName" placeholder="Day Name">
+            </mat-form-field>
+
+            <button mat-icon-button (click)="removeDay(dayIndex)">
+              <mat-icon matSuffix color="warn" (click)="removeDay(dayIndex)">delete</mat-icon>
+            </button>
+            <!-- loop of exercises -->
+            <div formArrayName="exercises">
+              <div *ngFor="let skill of exercises(dayIndex).controls; let exerciseIndex=index">
+                <div class="exercise" [formGroupName]="exerciseIndex">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Name your exercise</mat-label>
+                    <input matInput type="text" formControlName="exerciseName" placeholder="Exercise Name">
+                  </mat-form-field>
+                  <button mat-icon-button>
+                    <mat-icon matSuffix color="warn" (click)="removeExercise(dayIndex,exerciseIndex)">delete</mat-icon>
+                  </button>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Sets</mat-label>
+                    <input matInput type="number" placeholder="12" min="1" formControlName="sets">
+                  </mat-form-field>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Reps</mat-label>
+                    <input matInput type="number" placeholder="12" min="1" formControlName="reps">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <button mat-icon-button color="accent" (click)="addExercise(dayIndex)">
+              <mat-icon>add</mat-icon> Add an exercise
+            </button>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+        <button mat-icon-button color="primary" (click)="addDay()">
+          <mat-icon>add</mat-icon> Add a new day
+        </button>
+      </div>
+
+    </form>
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button matStepperNext>Next</button>
+  </mat-step>
+
+  <!-- review of everything  -->
+
+  <mat-step>
+    <ng-template matStepLabel>Review</ng-template>
+    <h2><strong> {{firstFormGroup.value.routineName}} </strong></h2>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let day of this.routineForm.value.days">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{day.dayName}}
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngFor="let exercise of day.exercises">
+          <div>
+            <h3>{{exercise.exerciseName}}:</h3>
+            <h4>Sets: <strong>{{exercise.sets}}</strong> x Reps: <strong>{{exercise.reps}}</strong> </h4>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-divider></mat-divider>
+    <!-- control panel -->
+    <div>
+      <button mat-stroked-button matStepperPrevious>Back</button>
+      <button mat-stroked-button color="warn" (click)="stepper.reset()">Reset</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+    </div>
+  </mat-step>
+</mat-stepper>

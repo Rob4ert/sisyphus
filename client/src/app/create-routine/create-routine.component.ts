@@ -3,26 +3,22 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-create-rutine',
-  templateUrl: './create-rutine.component.html',
-  styleUrls: ['./create-rutine.component.css']
+  selector: 'app-create-routine',
+  templateUrl: './create-routine.component.html',
+  styleUrls: ['./create-routine.component.css']
 })
-export class CreateRutineComponent implements OnInit {
-  isLinear = false;
+export class CreateRoutineComponent implements OnInit {
 
-  public rutine: any = {};
+
+  public routine: any = {};
 
   public firstFormGroup = this.fb.group({
-
+    routineName: '',
   });
 
 
-  public secondFormGroup = this.fb.group({
 
-  });
-
-
-  rutineForm: FormGroup = this.fb.group({
+  routineForm: FormGroup = this.fb.group({
     days: this.fb.array([])
   });
 
@@ -33,13 +29,12 @@ export class CreateRutineComponent implements OnInit {
   }
 
   days(): FormArray {
-    return this.rutineForm.get('days') as FormArray;
+    return this.routineForm.get('days') as FormArray;
   }
 
   newDay(): FormGroup {
     return this.fb.group({
-      firstName: '',
-      lastName: '',
+      dayName: '',
       exercises: this.fb.array([])
     });
   }
@@ -61,6 +56,8 @@ export class CreateRutineComponent implements OnInit {
   newExercise(): FormGroup {
     return this.fb.group({
       exerciseName: '',
+      sets: 0,
+      reps: 0,
 
     });
   }
@@ -74,7 +71,8 @@ export class CreateRutineComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.rutineForm.value);
+    console.log('this.firstFormGroup.value :>> ', this.firstFormGroup.value);
+    console.log(this.routineForm.value);
   }
 
 }
