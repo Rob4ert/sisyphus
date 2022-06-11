@@ -1,25 +1,13 @@
 const { prisma } = require('../db');
+const { saveRoutine } = require('../models/routine.model');
 
 const createRoutine = async function (req, res) {
-  const { userId } = req.session.uid;
-  const { days, name } = req.body;
+  const userId = req.session.uid;
+  const routine = req.body;
   try {
-    const routine = await prisma.routine.create({
-      data: {
-        days: {
-          create: [
-            ...days
-          ]
-        },
-        name,
-        user: { connect: { id: parseInt(userId) } },
-      },
-      include: {
-        days: true, // Include all posts in the returned object
-      },
-    });
+    const newRoutine = await saveRoutine(routine, userId);
     res.status(201);
-    res.send({ error: null, data: routine });
+    res.send({ error: null, data: newRoutine });
   } catch (error) {
     res.status(400);
     res.send({ error: "Error creating routine, please try again.", data: null });

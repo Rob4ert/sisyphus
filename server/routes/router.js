@@ -15,13 +15,13 @@ router.get('/login', getUser);
 router.post('/logout', checkLoggedIn, logout);
 
 // exercises
-router.post('/:userId/exercise', checkLoggedIn, checkIsUser, createExercise);
-router.delete('/:userId/exercise/:id', checkLoggedIn, checkIsUser, deleteExercise);
-router.put('/:userId/exercise/:id', checkLoggedIn, checkIsUser, updateExercise);
-router.get('/:userId/exercise/', checkLoggedIn, checkIsUser, getExercisesByUser);
+// router.post('/:userId/exercise', checkLoggedIn, checkIsUser, createExercise);
+// router.delete('/:userId/exercise/:id', checkLoggedIn, checkIsUser, deleteExercise);
+// router.put('/:userId/exercise/:id', checkLoggedIn, checkIsUser, updateExercise);
+// router.get('/:userId/exercise/', checkLoggedIn, checkIsUser, getExercisesByUser);
 
 // routine
-router.post('/:userId/routine', checkLoggedIn, checkIsUser, createRoutine);
+router.post('/routine', checkLoggedIn, createRoutine);
 router.delete('/:userId/routine/:id', checkLoggedIn, checkIsUser, deleteRoutine);
 router.put('/:userId/routine/:id', checkLoggedIn, checkIsUser, updateRoutine);
 router.get('/:userId/routine/', checkLoggedIn, checkIsUser, getRoutinesByUser);

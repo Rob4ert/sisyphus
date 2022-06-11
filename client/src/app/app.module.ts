@@ -12,7 +12,7 @@ import { AngularMaterialModule } from './material.module';
 import { CustomErrorInterceptor } from './custom-error-interceptor';
 import { LoginCardComponent } from './login-card/login-card.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CreateRoutineComponent } from './create-routine/create-routine.component';
+import { CreateRoutineComponent } from './create-rutine/create-routine.component';
 
 
 

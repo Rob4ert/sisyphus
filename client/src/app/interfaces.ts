@@ -15,7 +15,7 @@ export interface ApiResponse {
 
 export interface Routine {
   id?: string,
-  name: string,
+  routineName: string,
   days: any[],
 }
 

@@ -69,8 +69,8 @@ export class CreateRoutineComponent implements OnInit {
   newExercise(): FormGroup {
     return this.fb.group({
       exerciseName: '',
-      sets: 0,
-      reps: 0,
+      sets: 1,
+      reps: 1,
 
     });
   }
@@ -84,11 +84,12 @@ export class CreateRoutineComponent implements OnInit {
   }
 
   onSubmit() {
-    const newRoutine = {
-      name: this.firstFormGroup.value.routineName,
+    const routine = {
+      routineName: this.firstFormGroup.value.routineName,
       days: this.routineForm.value.days,
     };
-    console.log('newRoutine :>> ', newRoutine);
+    this.http.SaveRoutine(routine).subscribe((res) => console.log('res :>> ', res));
+    console.log('newRoutine :>> ', routine);
     console.log('this.firstFormGroup.value :>> ', this.firstFormGroup.value);
     console.log(this.routineForm.value);
   }
