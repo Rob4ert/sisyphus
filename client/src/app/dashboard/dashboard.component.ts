@@ -10,26 +10,33 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
-        ];
-      }
 
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
-    })
-  );
 
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  public dates: any[] = [];
+  constructor() { }
+
+  ngOnInit() {
+    this.getDates();
+  }
+
+
+  getDates() {
+    let baseDate = new Date(Date.now());
+    baseDate.setDate(baseDate.getDate() - 3);
+    this.dates;
+    for (let i = 0; i < 7; i++) {
+      this.dates.push({
+        month: baseDate.toLocaleDateString('en-US', { month: 'long' }),
+        name: baseDate.toLocaleDateString('en-US', { weekday: 'long' }),
+        number: baseDate.getDate()
+      });
+      baseDate.setDate(baseDate.getDate() + 1);
+    }
+  }
+
+
+  getTodayNumber() {
+    return new Date().getDate();
+  }
+
 }

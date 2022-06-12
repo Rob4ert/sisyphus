@@ -27,6 +27,11 @@
 }
 
 mat-card {
-  width: 20vw;
-  margin: 2%;
+  width: 30vw;
+  flex-shrink: 0;
+  margin: 1%;
+}
+
+.mat-h1 {
+  margin-left: 20px;
 }
