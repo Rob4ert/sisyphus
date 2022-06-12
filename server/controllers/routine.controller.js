@@ -55,7 +55,7 @@ const getRoutinesByUser = async function (req, res) {
     const routines = await prisma.routine.findMany({
       where: { UserId: parseInt(userId) },
     });
-    res.status(201);
+    res.status(200);
     res.send({ error: null, data: routines });
   } catch (error) {
     res.status(400);

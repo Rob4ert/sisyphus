@@ -19,7 +19,7 @@ const login = async (req, res) => {
           if (err) return next(err);
           delete user.password;
           delete user.id;
-          res.status(201);
+          res.status(200);
           res.send({ error: null, data: user });
         }
         );
@@ -38,7 +38,7 @@ const getUser = async function (req, res) {
     const user = await findUserById(id);
     delete user.password;
     delete user.id;
-    res.status(201);
+    res.status(200);
     res.send({ error: null, data: user });
   } catch (error) {
     res.status(401);
@@ -75,7 +75,7 @@ const createUser = async function (req, res) {
 const logout = (req, res) => {
   req.session.destroy();
   res.clearCookie('sessionId');
-  res.status(201);
+  res.status(200);
   res.send({ error: "You are logged out.", data: null });
 };
 
