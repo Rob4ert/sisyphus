@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { APIClientService } from '../api-client.service';
-import { User } from '../interfaces';
 import { NotificationsService } from '../notifications.service';
-import { UserService } from '../user.service';
+
 
 
 @Component({
@@ -21,8 +19,7 @@ export class CreateRoutineComponent implements OnInit {
   });
 
 
-
-  routineForm: FormGroup = this.fb.group({
+  public routineForm: FormGroup = this.fb.group({
     days: this.fb.array([])
   });
 
@@ -34,6 +31,8 @@ export class CreateRoutineComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  // day handling
 
   days(): FormArray {
     return this.routineForm.get('days') as FormArray;
@@ -53,6 +52,12 @@ export class CreateRoutineComponent implements OnInit {
   removeDay(dayIndex: number) {
     this.days().removeAt(dayIndex);
   }
+
+
+
+
+  // exercise handling
+
 
   exercises(dayIndex: number): FormArray {
     return this.days()
@@ -76,6 +81,8 @@ export class CreateRoutineComponent implements OnInit {
   removeExercise(dayIndex: number, skillIndex: number) {
     this.exercises(dayIndex).removeAt(skillIndex);
   }
+
+  // submit handling
 
   onSubmit() {
     const routine = {
