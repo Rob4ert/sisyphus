@@ -19,3 +19,14 @@
 .dashboard-card-content {
   text-align: center;
 }
+
+.dates-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+}
+
+mat-card {
+  width: 20vw;
+  margin: 2%;
+}

@@ -20,6 +20,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   imports: [
@@ -44,7 +45,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatSnackBarModule,
     MatGridListModule,
     MatStepperModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCardModule
 
   ],
   exports: [
@@ -67,7 +69,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatSnackBarModule,
     MatGridListModule,
     MatStepperModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCardModule
 
   ],
   providers: [
