@@ -18,6 +18,7 @@ const login = async (req, res) => {
         req.session.save(function (err) {
           if (err) return next(err);
           delete user.password;
+          delete user.id;
           res.status(201);
           res.send({ error: null, data: user });
         }
@@ -36,6 +37,7 @@ const getUser = async function (req, res) {
   try {
     const user = await findUserById(id);
     delete user.password;
+    delete user.id;
     res.status(201);
     res.send({ error: null, data: user });
   } catch (error) {
@@ -55,6 +57,7 @@ const createUser = async function (req, res) {
         return req.session.uid = newUser.id;
       });
       delete newUser.password;
+      delete newUser.id;
       res.status(201);
       res.send({ error: null, data: newUser });
     } catch (error) {
