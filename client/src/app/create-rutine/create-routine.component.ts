@@ -14,6 +14,7 @@ import { UserService } from '../user.service';
 })
 export class CreateRoutineComponent implements OnInit {
 
+  displayedColumns: string[] = ['name', 'sets', 'reps'];
 
   public firstFormGroup = this.fb.group({
     routineName: '',
