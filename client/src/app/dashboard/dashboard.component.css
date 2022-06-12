@@ -35,3 +35,7 @@ mat-card {
 .mat-h1 {
   margin-left: 20px;
 }
+
+.today {
+  background-color: #c2185b;
+}

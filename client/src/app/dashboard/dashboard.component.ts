@@ -11,6 +11,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 })
 export class DashboardComponent {
 
+  public today = new Date(Date.now()).getDate();
 
   public dates: any[] = [];
   constructor() { }
@@ -32,6 +33,8 @@ export class DashboardComponent {
       });
       baseDate.setDate(baseDate.getDate() + 1);
     }
+    console.log('this.today :>> ', this.today);
+    console.log('this.dates :>> ', this.dates);
   }
 
 
