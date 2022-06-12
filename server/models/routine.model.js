@@ -9,7 +9,7 @@ const saveRoutine = async function (routine, userId) {
       user: { connect: { id: parseInt(userId) } },
     },
     include: {
-      days: true, // Include all posts in the returned object
+      days: true,
     },
   });
   const newDays = await Promise.all(days.map(async (day) => {
@@ -19,24 +19,28 @@ const saveRoutine = async function (routine, userId) {
         routine: { connect: { id: newRoutine.id } },
       },
       include: {
-        exercises: true, // Include all posts in the returned object
+        exercises: true,
       },
     });
-    const newExercises = await Promise.all(day.exercises.map((exercise) => {
-      return prisma.exercise.create({
+    const newExercises = await Promise.all(day.exercises.map(async (exercise) => {
+      const newExercise = await prisma.exercise.create({
         data: {
           sets: exercise.sets,
           reps: exercise.reps,
           exerciseName: exercise.exerciseName,
           day: { connect: { id: newDay.id } },
+          user: { connect: { id: parseInt(userId) } },
         },
       });
+      delete newExercise.userId;
+      return newExercise;
     }));
     newDay.exercises = newExercises;
     return newDay;
   }));
 
   newRoutine.days = newDays;
+  delete newRoutine.userId;
   return newRoutine;
 };
 

@@ -19,8 +19,8 @@ model Exercise {
   isTimed      Boolean?
   day          Day      @relation(fields: [dayId], references: [id])
   dayId        Int
-  // user       User    @relation(fields: [userId], references: [id])
-  // userId     Int
+  user         User     @relation(fields: [userId], references: [id])
+  userId       Int
 }
 
 // model Set {
@@ -58,12 +58,12 @@ model Routine {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  email     String    @unique
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  email     String     @unique
   password  String
   name      String
   routines  Routine[]
-  // exercise  Exercise[]
+  exercise  Exercise[]
 }
