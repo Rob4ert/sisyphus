@@ -1,7 +1,21 @@
 <h1 class="mat-h1">Your week</h1>
+<div class="dates-controller">
+  <button class="dates-controller-btn" mat-icon-button (click)="moveBack()">
+    <mat-icon>
+      arrow_back_ios
+    </mat-icon>
+  </button>
+  <button class="dates-controller-btn" mat-icon-button (click)="moveForward()">
+    <mat-icon>
+      arrow_forward_ios
+    </mat-icon>
+  </button>
+</div>
 <div class="dates-container">
-  <ng-container *ngFor="let day of dates">
-    <mat-card [class.today]="day.number === today">
+
+  <!-- [class.today]="day.number === today" -->
+  <ng-container *ngFor="let day of dates; let dayIndex = index">
+    <mat-card [class.today]="day.number === today" [class.center]="dayIndex === 1">
       <mat-card-title>{{day.name}}</mat-card-title>
       <mat-card-subtitle>{{day.number}}, {{day.month}}</mat-card-subtitle>
       <mat-card-content>

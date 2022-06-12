@@ -11,32 +11,39 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 })
 export class DashboardComponent {
 
-  public today = new Date(Date.now()).getDate();
-
+  public baseDate = new Date(Date.now());
+  public today = this.baseDate.getDate();
   public dates: any[] = [];
+
   constructor() { }
 
   ngOnInit() {
-    this.getDates();
+    this.setDates(this.baseDate);
   }
 
 
-  getDates() {
-    let baseDate = new Date(Date.now());
-    baseDate.setDate(baseDate.getDate() - 3);
-    this.dates;
-    for (let i = 0; i < 7; i++) {
+  setDates(date: Date) {
+    this.dates = [];
+    date.setDate(date.getDate() - 1);
+    for (let i = 0; i < 3; i++) {
       this.dates.push({
-        month: baseDate.toLocaleDateString('en-US', { month: 'long' }),
-        name: baseDate.toLocaleDateString('en-US', { weekday: 'long' }),
-        number: baseDate.getDate()
+        month: date.toLocaleDateString('en-US', { month: 'long' }),
+        name: date.toLocaleDateString('en-US', { weekday: 'long' }),
+        number: date.getDate()
       });
-      baseDate.setDate(baseDate.getDate() + 1);
+      date.setDate(date.getDate() + 1);
     }
-    console.log('this.today :>> ', this.today);
-    console.log('this.dates :>> ', this.dates);
   }
 
+  moveForward() {
+    this.baseDate.setDate(this.baseDate.getDate() - 1);
+    this.setDates(this.baseDate);
+  }
+
+  moveBack() {
+    this.baseDate.setDate(this.baseDate.getDate() - 3);
+    this.setDates(this.baseDate);
+  }
 
   getTodayNumber() {
     return new Date().getDate();

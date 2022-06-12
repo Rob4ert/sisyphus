@@ -21,21 +21,41 @@
 }
 
 .dates-container {
+  width: 100vw;
   display: flex;
   flex-direction: row;
-  overflow-x: scroll;
 }
 
-mat-card {
-  width: 30vw;
-  flex-shrink: 0;
-  margin: 1%;
+.dates-controller {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  top: 100px;
+  z-index: 2;
+
 }
 
-.mat-h1 {
-  margin-left: 20px;
+.dates-controller-btn {
+  height: 200px;
+  width: 10vw;
+}
+
+.center {
+  width: 35vw;
 }
 
 .today {
   background-color: #c2185b;
+}
+
+mat-card {
+  margin: 1vw;
+}
+
+
+
+.mat-h1 {
+  margin-left: 20px;
 }
