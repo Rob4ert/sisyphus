@@ -34,6 +34,7 @@ export class CustomErrorInterceptor implements ErrorHandler {
     const config = new MatSnackBarConfig();
     config.verticalPosition = 'bottom';
     config.horizontalPosition = 'center';
+    config.panelClass = ['mat-toolbar', 'mat-warn'];
     config.duration = 2000;
     this.zone.run(() => {
       this.snackBar.open(message, 'Dismiss', config);
