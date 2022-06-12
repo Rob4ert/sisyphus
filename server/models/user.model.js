@@ -2,7 +2,7 @@ const { prisma } = require('../db');
 
 
 const findUser = async function (email) {
-  return await prisma.user.findUnique({
+  const newUser = await prisma.user.findUnique({
     where: {
       email,
     },
@@ -10,8 +10,9 @@ const findUser = async function (email) {
       routines: true,
     },
   }
-
   );
+  newUser.routines.forEach(routine => delete routine.userId);
+  return newUser;
 };
 
 const findUserById = async function (id) {
