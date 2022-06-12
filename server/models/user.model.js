@@ -6,7 +6,12 @@ const findUser = async function (email) {
     where: {
       email,
     },
-  });
+    include: {
+      routines: true,
+    },
+  }
+
+  );
 };
 
 const findUserById = async function (id) {
