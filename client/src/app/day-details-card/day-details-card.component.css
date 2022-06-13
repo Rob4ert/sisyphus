@@ -1,0 +1,14 @@
+table {
+  width: 100%;
+}
+
+.day-pointer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.day-pointer mat-icon {
+  transform: scale(3);
+  margin: -20px 0px -40px 0px;
+}

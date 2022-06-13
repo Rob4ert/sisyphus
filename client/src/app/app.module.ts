@@ -1,3 +1,4 @@
+import { DayDetailsCardComponent } from './day-details-card/day-details-card.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,7 +24,8 @@ import { CreateRoutineComponent } from './create-rutine/create-routine.component
     NavBarComponent,
     LoginCardComponent,
     DashboardComponent,
-    CreateRoutineComponent
+    CreateRoutineComponent,
+    DayDetailsCardComponent
   ],
   imports: [
     BrowserModule,
