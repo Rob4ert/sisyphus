@@ -13,16 +13,17 @@ const findUser = async function (email) {
   }
   );
   newUser.routines = await readRoutines(newUser.id);
-  // newUser.routines.forEach(routine => delete routine.userId);
   return newUser;
 };
 
 const findUserById = async function (id) {
-  return await prisma.user.findUnique({
+  const newUser = await prisma.user.findUnique({
     where: {
       id,
     },
   });
+  newUser.routines = await readRoutines(newUser.id);
+  return newUser;
 };
 
 const writeUser = async function (user) {

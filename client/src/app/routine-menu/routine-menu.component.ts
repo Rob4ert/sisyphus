@@ -20,6 +20,7 @@ export class RoutineMenuComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = this.userService.currentUser.subscribe(user => {
       this.user = user;
+      console.log('this.user.routines :>> ', this.user?.routines);
       console.log('user routine menu :>> ', this.user);
     });
   }
