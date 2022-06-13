@@ -29,7 +29,7 @@ export interface Day {
   id?: string,
   dayName: string,
   exercises: any[],
-  weekDays: string;
+  weekDays: number[];
 }
 
 
