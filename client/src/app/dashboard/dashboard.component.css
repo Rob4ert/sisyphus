@@ -24,6 +24,7 @@
   width: 100vw;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
 }
 
 .dates-controller {
@@ -32,18 +33,19 @@
   flex-direction: row;
   justify-content: space-between;
   position: absolute;
-  top: 100px;
+  top: 130px;
   z-index: 2;
 
 }
 
 .dates-controller-btn {
-  height: 200px;
-  width: 10vw;
+  height: 150px;
+  width: 5vw;
 }
 
 .center {
   width: 35vw;
+  flex-grow: 2;
 }
 
 .today {
@@ -51,6 +53,7 @@
 }
 
 mat-card {
+  flex-grow: 1;
   margin: 1vw;
 }
 
