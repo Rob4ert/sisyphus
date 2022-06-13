@@ -22,8 +22,8 @@ export class DashboardComponent {
   public dates: any[] = [];
 
   // routine
-
-  public routine = this.user?.routines[0];
+  public routines = this.user?.routines;
+  public activeRoutine = this.user?.routines[1];
 
   constructor(
     private userService: UserService,
@@ -33,17 +33,24 @@ export class DashboardComponent {
   ngOnInit() {
     this.subscription = this.userService.currentUser.subscribe(user => {
       this.user = user;
-      this.http.getRoutine(user?.routines[0].id).subscribe((res) => console.log('res :>> ', res));
+      this.setDates(this.baseDate);
+      this.setRoutineDays(user);
     });
-    this.setDates(this.baseDate);
+
 
   }
 
-  // setRoutineDays() {
-  //   this.routine.days.map((day) => {
-
-  //   })
-  // }
+  setRoutineDays(user: any) {
+    user.routines[1].days.forEach((routineDay: any) => {
+      const weekDays = JSON.parse(routineDay.weekDays);
+      console.log('weekDays :>> ', weekDays);
+      this.dates.forEach((date) => {
+        if (weekDays.includes(date.weekDay)) {
+          date.routineDay = routineDay;
+        }
+      });
+    });
+  }
 
   setDates(date: Date) {
     this.dates = [];
