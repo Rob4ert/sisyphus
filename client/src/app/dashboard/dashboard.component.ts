@@ -85,8 +85,4 @@ export class DashboardComponent {
     this.setDates(this.baseDate);
   }
 
-  getTodayNumber() {
-    return new Date().getDate();
-  }
-
 }
