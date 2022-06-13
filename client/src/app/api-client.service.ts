@@ -31,7 +31,6 @@ export class APIClientService {
     }));
   }
 
-
   loginUser(user: User): Observable<User> {
     return this.http.post<ApiResponseUser>(`${url}/login`, user, {
       withCredentials: true,
@@ -55,6 +54,15 @@ export class APIClientService {
     }).pipe(map(response => {
       return response.data;
     }));
+  }
+
+  getRoutine(routineId: number) {
+    return this.http.get<ApiResponseRoutine>(`${url}/routine`, {
+      withCredentials: true,
+    }).pipe(map(response => {
+      return response.data;
+    }));
+
   }
 
 }

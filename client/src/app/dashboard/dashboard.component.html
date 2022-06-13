@@ -12,8 +12,6 @@
   </button>
 </div>
 <div class="dates-container">
-
-  <!-- [class.today]="day.number === today" -->
   <ng-container *ngFor="let day of dates; let dayIndex = index">
     <mat-card [class.today]="day.number === today" [class.center]="dayIndex === 1">
       <mat-card-title>{{day.name}}</mat-card-title>
@@ -29,6 +27,4 @@
       </mat-card-actions>
     </mat-card>
   </ng-container>
-
-
 </div>

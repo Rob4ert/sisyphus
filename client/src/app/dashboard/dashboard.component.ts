@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-
+import { Subscription } from 'rxjs';
+import { APIClientService } from '../api-client.service';
+import { User } from '../interfaces';
+import { UserService } from '../user.service';
 
 
 @Component({
@@ -11,16 +12,38 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 })
 export class DashboardComponent {
 
+  //  user
+  public user: User | null = null;
+  public subscription: Subscription | undefined;
+
+  // dates
   public baseDate = new Date(Date.now());
   public today = this.baseDate.getDate();
   public dates: any[] = [];
 
-  constructor() { }
+  // routine
+
+  public routine = this.user?.routines[0];
+
+  constructor(
+    private userService: UserService,
+    private http: APIClientService,
+  ) { }
 
   ngOnInit() {
+    this.subscription = this.userService.currentUser.subscribe(user => {
+      this.user = user;
+      this.http.getRoutine(user?.routines[0].id).subscribe((res) => console.log('res :>> ', res));
+    });
     this.setDates(this.baseDate);
+
   }
 
+  // setRoutineDays() {
+  //   this.routine.days.map((day) => {
+
+  //   })
+  // }
 
   setDates(date: Date) {
     this.dates = [];
@@ -29,7 +52,8 @@ export class DashboardComponent {
       this.dates.push({
         month: date.toLocaleDateString('en-US', { month: 'long' }),
         name: date.toLocaleDateString('en-US', { weekday: 'long' }),
-        number: date.getDate()
+        number: date.getDate(),
+        weekDay: date.getDay()
       });
       date.setDate(date.getDate() + 1);
     }

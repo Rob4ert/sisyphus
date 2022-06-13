@@ -16,6 +16,7 @@ const saveRoutine = async function (routine, userId) {
     const newDay = await prisma.day.create({
       data: {
         dayName: day.dayName,
+        weekDays: day.weekDays,
         routine: { connect: { id: newRoutine.id } },
       },
       include: {
@@ -51,3 +52,4 @@ const saveRoutine = async function (routine, userId) {
 module.exports = {
   saveRoutine
 };
+
