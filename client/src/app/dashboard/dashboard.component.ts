@@ -51,6 +51,7 @@ export class DashboardComponent {
         this.dates.forEach((date) => {
           if (weekDays.includes(date.weekDay)) {
             date.routineDay = routineDay;
+            date.isWorkDay = true;
           }
         });
       }
@@ -67,7 +68,8 @@ export class DashboardComponent {
         name: date.toLocaleDateString('en-US', { weekday: 'long' }),
         number: date.getDate(),
         weekDay: date.getDay(),
-        routineDay: { dayName: "Nothing for Today." }
+        routineDay: { dayName: "Nothing for Today." },
+        isWorkDay: false
       });
       date.setDate(date.getDate() + 1);
     }

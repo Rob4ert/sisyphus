@@ -21,11 +21,7 @@
         <p *ngIf="day.routineDay.dayName !== 'Nothing for Today.'">{{activeRoutine.routineName}}</p>
 
       </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
     </mat-card>
   </ng-container>
 </div>
-<app-day-details-card [routineDay]="dates[1].routineDay"></app-day-details-card>
+<app-day-details-card *ngIf="dates[1].isWorkDay" [routineDay]="dates[1].routineDay"></app-day-details-card>
