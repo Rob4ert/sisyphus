@@ -1,4 +1,5 @@
 const { prisma } = require('../db');
+const { readRoutines } = require('./routine.model');
 
 
 const findUser = async function (email) {
@@ -11,7 +12,8 @@ const findUser = async function (email) {
     },
   }
   );
-  newUser.routines.forEach(routine => delete routine.userId);
+  newUser.routines = await readRoutines(newUser.id);
+  // newUser.routines.forEach(routine => delete routine.userId);
   return newUser;
 };
 

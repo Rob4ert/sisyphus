@@ -1,4 +1,5 @@
 const { prisma } = require('../db');
+const { readAllDays } = require('./day.model');
 
 
 const saveRoutine = async function (routine, userId) {
@@ -39,17 +40,28 @@ const saveRoutine = async function (routine, userId) {
     newDay.exercises = newExercises;
     return newDay;
   }));
-
   newRoutine.days = newDays;
   delete newRoutine.userId;
   return newRoutine;
 };
 
+const readRoutines = async function (userId) {
+  const routines = await prisma.routine.findMany({
+    where: { userId: parseInt(userId) },
+  }
+  );
+  const newRoutines = await Promise.all(routines.map(async (routine) => {
+    const days = await readAllDays(routine.id);
+    routine.days = days;
+    return routine;
+  }));
+  return newRoutines;
+};
 
 
 
 
 module.exports = {
-  saveRoutine
+  saveRoutine, readRoutines
 };
 

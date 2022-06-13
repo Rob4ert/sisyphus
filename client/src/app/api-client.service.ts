@@ -56,13 +56,14 @@ export class APIClientService {
     }));
   }
 
-  getRoutine(routineId: number) {
-    return this.http.get<ApiResponseRoutine>(`${url}/routine`, {
-      withCredentials: true,
-    }).pipe(map(response => {
-      return response.data;
-    }));
+  // getRoutine(routineId: number) {
+  //   return this.http.get<ApiResponseRoutine>(`${url}/routine`, {
+  //     withCredentials: true,
+  //   }).pipe(map(response => {
+  //     return response.data;
+  //   }));
 
-  }
+  // }
 
 }
+

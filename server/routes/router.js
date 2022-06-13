@@ -4,7 +4,7 @@ const { createUser, login, logout, getUser } = require('../controllers/user.cont
 const { createExercise, deleteExercise, updateExercise, getExercisesByUser } = require('../controllers/exercise.controller');
 const { createRoutine, deleteRoutine, updateRoutine, getRoutinesByUser } = require('../controllers/routine.controller');
 const { createSet, deleteSet, updateSet, getSetsByDay } = require('../controllers/set.controller');
-const { getAllDays } = require('../controllers/days.controller');
+// const { getAllDays } = require('../controllers/days.controller');
 const { signInValidator, signInConfig, logInConfig, logInValidator } = require('../middlewares/validators.middleware');
 
 const router = new Router();
@@ -23,14 +23,13 @@ router.post('/logout', checkLoggedIn, logout);
 
 // routine
 router.post('/routine', checkLoggedIn, createRoutine);
-
 router.delete('/:userId/routine/:id', checkLoggedIn, checkIsUser, deleteRoutine);
 router.put('/:userId/routine/:id', checkLoggedIn, checkIsUser, updateRoutine);
 router.get('/routine', checkLoggedIn, getRoutinesByUser);
 
 // days
 
-router.get('/routine/:routineId', checkLoggedIn, getAllDays);
+// router.get('/routine/:routineId', checkLoggedIn, getAllDays);
 
 // sets
 router.post('/:userId/set', checkLoggedIn, checkIsUser, createSet);
