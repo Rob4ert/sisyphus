@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { User, Routine, ApiResponseRoutine, ApiResponseUser } from './interfaces';
+import { User, Routine, ApiResponseRoutine, ApiResponseUser, ApiResponseRoutines } from './interfaces';
 
 
 
@@ -56,7 +56,7 @@ export class APIClientService {
     }));
   }
   selectRoutine(routines: Routine[]) {
-    return this.http.put<ApiResponseRoutine>(`${url}/routine`, routines, {
+    return this.http.put<ApiResponseRoutines>(`${url}/routine`, routines, {
       withCredentials: true,
     }).pipe(map(response => {
       return response.data;

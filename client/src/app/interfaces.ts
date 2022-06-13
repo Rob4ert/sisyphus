@@ -18,9 +18,14 @@ export interface ApiResponseRoutine {
   data: Routine;
   error: string;
 }
+export interface ApiResponseRoutines {
+  data: Routine[];
+  error: string;
+}
+
 
 export interface Routine {
-  active?: boolean;
+  isActive?: boolean;
   id?: string,
   routineName: string,
   days: any[],

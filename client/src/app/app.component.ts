@@ -11,6 +11,9 @@ export class AppComponent {
   title = 'sisyphus';
   constructor(private http: APIClientService, private userService: UserService,) { }
   ngOnInit(): void {
-    this.http.getUser().subscribe(user => this.userService.updateUser(user));
+    this.http.getUser().subscribe(user => {
+      this.userService.updateUser(user);
+
+    });
   }
 }

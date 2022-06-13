@@ -1,6 +1,5 @@
 import { Routine } from './../interfaces';
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { User } from '../interfaces';
 import { UserService } from '../user.service';
 import { APIClientService } from '../api-client.service';
@@ -18,27 +17,43 @@ export class RoutineMenuComponent implements OnInit {
     private userService: UserService,
     private http: APIClientService
   ) { }
-  user: User | null = null;
+  public user: User | null = null;
 
-  subscription: Subscription | null = null;
 
-  activeRoutine: any = '';
+
+  public activeRoutine: Routine | null = null;
 
   displayedColumns: string[] = ['name', 'sets', 'reps'];
 
   ngOnInit(): void {
-    this.subscription = this.userService.currentUser.subscribe(user => {
-      this.user = user;
+    this.userService.currentUser.subscribe(user => {
+      if (user) {
+        this.user = user;
+      }
     });
+    this.userService.activeRoutine.subscribe(routine => {
+      if (this.user) {
+        this.activeRoutine = routine;
+      }
+    });
+
   }
 
+  // updateActiveRoutine(routines: Routine[]) {
+  //   routines.map((routine) => {
+  //     if (routine.isActive) {
+  //       this.userService.updateActiveRoutine(routine);
+  //     }
+  //   });
+  // }
+
   activateRoutine() {
-    const id = this.activeRoutine.id;
-    if (this.user) {
+    if (this.activeRoutine && this.user) {
+      const id = this.activeRoutine.id;
       this.user.routines.forEach(routine => {
-        routine.active = routine.id === id;
+        routine.isActive = routine.id === id;
       });
-      this.http.selectRoutine(this.user.routines).subscribe((res) => console.log('res :>> ', res));
+      this.http.selectRoutine(this.user.routines).subscribe((routines) => this.userService.updateActiveRoutine(routines));
     }
   }
 

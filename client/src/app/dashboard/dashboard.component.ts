@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Day, User } from '../interfaces';
+import { Day, Routine, User } from '../interfaces';
 import { UserService } from '../user.service';
 
 
@@ -13,7 +12,7 @@ export class DashboardComponent {
 
   //  user
   public user: any;
-  public subscription: Subscription | undefined;
+
 
   // dates
   public baseDate = new Date(Date.now());
@@ -29,19 +28,17 @@ export class DashboardComponent {
   ) { }
 
   ngOnInit() {
-    this.subscription = this.userService.currentUser.subscribe(user => {
+    this.userService.currentUser.subscribe(user => {
       this.user = user;
       this.setDates(this.baseDate);
       if (user) {
         this.setRoutineDays(user);
-        this.activeRoutine = this.user?.routines[1];
         this.routines = this.user?.routines;
       };
     });
-
-
+    this.userService.activeRoutine.subscribe((routine) => this.activeRoutine = routine);
   }
-
+  // routine methods
 
   setRoutineDays(user: User) {
     user.routines[2].days.forEach((routineDay: Day) => {
@@ -58,6 +55,8 @@ export class DashboardComponent {
 
   }
 
+
+  // dates methods
   setDates(date: Date) {
     this.dates = [];
     date.setDate(date.getDate() - 1);
@@ -76,6 +75,16 @@ export class DashboardComponent {
     this.setRoutineDays(this.user);
   }
 
+  isToday(date: Date) {
+    const today = new Date();
+    return date.getDate() == today.getDate() &&
+      date.getMonth() == today.getMonth() &&
+      date.getFullYear() == today.getFullYear();
+  }
+
+
+  // button handlers
+
   moveForward() {
     this.baseDate.setDate(this.baseDate.getDate() - 1);
     this.setDates(this.baseDate);
@@ -86,12 +95,7 @@ export class DashboardComponent {
     this.setDates(this.baseDate);
   }
 
-  isToday(date: Date) {
-    const today = new Date();
-    return date.getDate() == today.getDate() &&
-      date.getMonth() == today.getMonth() &&
-      date.getFullYear() == today.getFullYear();
-  }
+
 
 
 }
