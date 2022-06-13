@@ -3,9 +3,9 @@
     expand_less
   </mat-icon>
 </div>
-<mat-card>
-  <mat-card-title>Workout </mat-card-title>
-  <mat-card-subtitle>{{date.routineDay.dayName}}</mat-card-subtitle>
+<mat-card [class.today]="date.isToday">
+  <mat-card-title>{{date.routineDay.dayName}} </mat-card-title>
+  <mat-card-subtitle>Workout</mat-card-subtitle>
   <mat-card-content>
     <table mat-table [dataSource]="date.routineDay.exercises" class="mat-elevation-z8">
       <!-- Name Column -->
@@ -29,6 +29,6 @@
 
   </mat-card-content>
   <mat-card-actions align="end">
-    <button mat-raised-button color="warn">START!</button>
+    <button *ngIf="date.isToday" mat-raised-button color="warn">START!</button>
   </mat-card-actions>
 </mat-card>

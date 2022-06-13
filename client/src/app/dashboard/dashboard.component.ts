@@ -68,7 +68,8 @@ export class DashboardComponent {
         number: date.getDate(),
         weekDay: date.getDay(),
         routineDay: { dayName: "Nothing for Today." },
-        isWorkDay: false
+        isWorkDay: false,
+        isToday: this.isToday(date)
       });
       date.setDate(date.getDate() + 1);
     }
@@ -84,5 +85,13 @@ export class DashboardComponent {
     this.baseDate.setDate(this.baseDate.getDate() - 3);
     this.setDates(this.baseDate);
   }
+
+  isToday(date: Date) {
+    const today = new Date();
+    return date.getDate() == today.getDate() &&
+      date.getMonth() == today.getMonth() &&
+      date.getFullYear() == today.getFullYear();
+  }
+
 
 }

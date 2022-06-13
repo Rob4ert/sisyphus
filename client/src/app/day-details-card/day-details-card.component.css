@@ -16,3 +16,7 @@ table {
   transform: scale(3);
   margin: -10px 0px -10px 0px;
 }
+
+.today {
+  background-color: #c2185b;
+}

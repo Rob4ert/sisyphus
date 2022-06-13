@@ -17,5 +17,5 @@
 }
 
 mat-sidenav-content {
-  overflow: clip;
+  overflow-x: clip;
 }

@@ -13,7 +13,7 @@
 </div>
 <div class="dates-container">
   <ng-container *ngFor="let day of dates; let dayIndex = index">
-    <mat-card [class.today]="day.number === today" [class.center]="dayIndex === 1">
+    <mat-card [class.today]="day.isToday" [class.center]="dayIndex === 1">
       <mat-card-title>{{day.name}}</mat-card-title>
       <mat-card-subtitle>{{day.number}}, {{day.month}}</mat-card-subtitle>
       <mat-card-content>

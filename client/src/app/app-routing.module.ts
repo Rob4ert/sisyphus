@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupCardComponent },
   { path: 'login', component: LoginCardComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'create-rutine', component: CreateRoutineComponent },
+  { path: 'create-routine', component: CreateRoutineComponent },
 ];
 
 @NgModule({
