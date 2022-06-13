@@ -65,7 +65,7 @@ export class DashboardComponent {
     for (let i = 0; i < 3; i++) {
       this.dates.push({
         month: date.toLocaleDateString('en-US', { month: 'long' }),
-        name: date.toLocaleDateString('en-US', { weekday: 'long' }),
+        name: date.toLocaleDateString('en-US', { weekday: 'short' }),
         number: date.getDate(),
         weekDay: date.getDay(),
         routineDay: { dayName: "Nothing for Today." },
