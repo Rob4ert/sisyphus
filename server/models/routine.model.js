@@ -65,9 +65,7 @@ const reWriteRoutines = async function (routines) {
       where: { id: parseInt(routine.id) },
       data: { isActive: routine.isActive },
     });
-
     delete newRoutine.userId;
-    console.log('routine :>> ', newRoutine);
     return newRoutine;
   }));
   return newRoutines;
