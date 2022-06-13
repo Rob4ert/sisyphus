@@ -53,6 +53,7 @@ const readRoutines = async function (userId) {
   const newRoutines = await Promise.all(routines.map(async (routine) => {
     const days = await readAllDays(routine.id);
     routine.days = days;
+    delete routine.userId;
     return routine;
   }));
   return newRoutines;

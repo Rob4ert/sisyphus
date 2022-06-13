@@ -37,7 +37,6 @@ export class RoutineMenuComponent implements OnInit {
         routine.active = routine.id === id;
       });
     }
-    console.log('this.user.routines :>> ', this.user?.routines);
   }
 
 }
