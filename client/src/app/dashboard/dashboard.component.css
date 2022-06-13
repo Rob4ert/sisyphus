@@ -45,7 +45,8 @@
 }
 
 .center {
-  width: 35vw;
+  width: 37vw;
+  flex-shrink: 0;
   flex-grow: 2;
 }
 

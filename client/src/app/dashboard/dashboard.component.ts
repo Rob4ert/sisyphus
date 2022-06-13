@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { APIClientService } from '../api-client.service';
 import { Day, User } from '../interfaces';
 import { UserService } from '../user.service';
 
