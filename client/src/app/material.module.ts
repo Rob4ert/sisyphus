@@ -22,6 +22,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -46,7 +47,8 @@ import { MatCardModule } from '@angular/material/card';
     MatGridListModule,
     MatStepperModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+
 
   ],
   exports: [
@@ -70,7 +72,7 @@ import { MatCardModule } from '@angular/material/card';
     MatGridListModule,
     MatStepperModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
 
   ],
   providers: [

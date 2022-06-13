@@ -1,3 +1,4 @@
+import { RoutineMenuComponent } from './routine-menu/routine-menu.component';
 import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { CreateRoutineComponent } from './create-rutine/create-routine.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'login', component: LoginCardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'create-routine', component: CreateRoutineComponent },
+  { path: 'routine-menu', component: RoutineMenuComponent },
 ];
 
 @NgModule({
