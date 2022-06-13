@@ -11,6 +11,8 @@ export class DayDetailsCardComponent implements OnInit {
   displayedColumns: string[] = ['name', 'sets', 'reps'];
   @Input()
   routineDay!: Day;
+
+
   constructor() { }
 
   ngOnInit(): void {

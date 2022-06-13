@@ -14,9 +14,5 @@ table {
 
 .day-pointer mat-icon {
   transform: scale(3);
-  margin: -20px 0px -40px 0px;
+  margin: -10px 0px -10px 0px;
 }
-
-/* mat-card-actions {
-  margin-bottom: 0;
-} */
