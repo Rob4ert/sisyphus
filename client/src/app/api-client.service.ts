@@ -55,6 +55,13 @@ export class APIClientService {
       return response.data;
     }));
   }
+  selectRoutine(routines: Routine[]) {
+    return this.http.put<ApiResponseRoutine>(`${url}/routine`, routines, {
+      withCredentials: true,
+    }).pipe(map(response => {
+      return response.data;
+    }));
+  }
 
   // getRoutine(routineId: number) {
   //   return this.http.get<ApiResponseRoutine>(`${url}/routine`, {

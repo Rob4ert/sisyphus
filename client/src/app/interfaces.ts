@@ -5,8 +5,8 @@ export interface User {
   email: String,
   password: string,
   repeatPassword?: string,
-  routines: any[],
-  exercise: Routine[],
+  routines: Routine[],
+  exercise: any[],
 }
 
 export interface ApiResponseUser {
@@ -20,6 +20,7 @@ export interface ApiResponseRoutine {
 }
 
 export interface Routine {
+  active?: boolean;
   id?: string,
   routineName: string,
   days: any[],

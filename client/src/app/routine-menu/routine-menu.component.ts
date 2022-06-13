@@ -1,10 +1,9 @@
 import { Routine } from './../interfaces';
 import { Component, OnInit } from '@angular/core';
-import { NgModel } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { User } from '../interfaces';
 import { UserService } from '../user.service';
-NgModel;
+import { APIClientService } from '../api-client.service';
 
 
 
@@ -15,7 +14,10 @@ NgModel;
 })
 export class RoutineMenuComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private http: APIClientService
+  ) { }
   user: User | null = null;
 
   subscription: Subscription | null = null;
@@ -36,6 +38,7 @@ export class RoutineMenuComponent implements OnInit {
       this.user.routines.forEach(routine => {
         routine.active = routine.id === id;
       });
+      this.http.selectRoutine(this.user.routines).subscribe((res) => console.log('res :>> ', res));
     }
   }
 
