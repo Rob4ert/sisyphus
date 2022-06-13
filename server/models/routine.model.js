@@ -59,10 +59,23 @@ const readRoutines = async function (userId) {
   return newRoutines;
 };
 
+const reWriteRoutines = async function (routines) {
+  const newRoutines = await Promise.all(routines.map(async (routine) => {
+    const newRoutine = await prisma.routine.update({
+      where: { id: parseInt(routine.id) },
+      data: { isActive: routine.isActive },
+    });
+
+    delete newRoutine.userId;
+    console.log('routine :>> ', newRoutine);
+    return newRoutine;
+  }));
+  return newRoutines;
+};
 
 
 
 module.exports = {
-  saveRoutine, readRoutines
+  saveRoutine, readRoutines, reWriteRoutines
 };
 

@@ -49,6 +49,7 @@ model Day {
 
 model Routine {
   id          Int      @id @default(autoincrement())
+  isActive    Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   routineName String   @db.VarChar(255)

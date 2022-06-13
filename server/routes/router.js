@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { checkLoggedIn, checkIsUser } = require('../middlewares/auth.middleware');
 const { createUser, login, logout, getUser } = require('../controllers/user.controller');
 const { createExercise, deleteExercise, updateExercise, getExercisesByUser } = require('../controllers/exercise.controller');
-const { createRoutine, deleteRoutine, updateRoutine, getRoutinesByUser } = require('../controllers/routine.controller');
+const { createRoutine, deleteRoutine, updateRoutines, getRoutinesByUser } = require('../controllers/routine.controller');
 const { createSet, deleteSet, updateSet, getSetsByDay } = require('../controllers/set.controller');
 // const { getAllDays } = require('../controllers/days.controller');
 const { signInValidator, signInConfig, logInConfig, logInValidator } = require('../middlewares/validators.middleware');
@@ -23,8 +23,9 @@ router.post('/logout', checkLoggedIn, logout);
 
 // routine
 router.post('/routine', checkLoggedIn, createRoutine);
+router.put('/routine', checkLoggedIn, updateRoutines);
 router.delete('/:userId/routine/:id', checkLoggedIn, checkIsUser, deleteRoutine);
-router.put('/:userId/routine/:id', checkLoggedIn, checkIsUser, updateRoutine);
+
 router.get('/routine', checkLoggedIn, getRoutinesByUser);
 
 // days
