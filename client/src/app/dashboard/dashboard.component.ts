@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { APIClientService } from '../api-client.service';
-import { User } from '../interfaces';
+import { Day, User } from '../interfaces';
 import { UserService } from '../user.service';
 
 
@@ -13,7 +13,7 @@ import { UserService } from '../user.service';
 export class DashboardComponent {
 
   //  user
-  public user: User | null = null;
+  public user: any;
   public subscription: Subscription | undefined;
 
   // dates
@@ -22,34 +22,40 @@ export class DashboardComponent {
   public dates: any[] = [];
 
   // routine
-  public routines = this.user?.routines;
-  public activeRoutine = this.user?.routines[1];
+  public routines: any;
+  public activeRoutine: any;
 
   constructor(
     private userService: UserService,
-    private http: APIClientService,
   ) { }
 
   ngOnInit() {
     this.subscription = this.userService.currentUser.subscribe(user => {
       this.user = user;
       this.setDates(this.baseDate);
-      this.setRoutineDays(user);
+      if (user) {
+        this.setRoutineDays(user);
+        this.activeRoutine = this.user?.routines[1];
+        this.routines = this.user?.routines;
+      };
     });
 
 
   }
 
-  setRoutineDays(user: any) {
-    user.routines[1].days.forEach((routineDay: any) => {
-      const weekDays = JSON.parse(routineDay.weekDays);
-      console.log('weekDays :>> ', weekDays);
-      this.dates.forEach((date) => {
-        if (weekDays.includes(date.weekDay)) {
-          date.routineDay = routineDay;
-        }
-      });
+
+  setRoutineDays(user: User) {
+    user.routines[2].days.forEach((routineDay: Day) => {
+      if (routineDay.weekDays) {
+        const weekDays = routineDay.weekDays;
+        this.dates.forEach((date) => {
+          if (weekDays.includes(date.weekDay)) {
+            date.routineDay = routineDay;
+          }
+        });
+      }
     });
+
   }
 
   setDates(date: Date) {
@@ -60,10 +66,12 @@ export class DashboardComponent {
         month: date.toLocaleDateString('en-US', { month: 'long' }),
         name: date.toLocaleDateString('en-US', { weekday: 'long' }),
         number: date.getDate(),
-        weekDay: date.getDay()
+        weekDay: date.getDay(),
+        routineDay: { dayName: "Nothing for Today." }
       });
       date.setDate(date.getDate() + 1);
     }
+    this.setRoutineDays(this.user);
   }
 
   moveForward() {

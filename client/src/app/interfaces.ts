@@ -25,6 +25,13 @@ export interface Routine {
   days: any[],
 }
 
+export interface Day {
+  id?: string,
+  dayName: string,
+  exercises: any[],
+  weekDays: string;
+}
+
 
 // model User {
 //   id        Int @id @default (autoincrement())
