@@ -4,27 +4,30 @@
     <mat-card-subtitle>Small</mat-card-subtitle>
   </mat-card-title-group>
   <mat-card-content>
-    <ng-component *ngFor="let routine of user?.routines">
-      {{routine.routineName}}
-      <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>dialpad</mat-icon>
-          <span>Select</span>
-        </button>
-        <button mat-menu-item disabled>
-          <mat-icon>voicemail</mat-icon>
-          <span>Modify</span>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>notifications_off</mat-icon>
-          <span>Delete</span>
-        </button>
-      </mat-menu> -->
-    </ng-component>
 
+    <label id="example-radio-group-label">Pick One!</label>
+    <mat-radio-group [(ngModel)]="selectedRoutine">
 
+      <mat-radio-button class="example-radio-button" *ngFor="let routine of user?.routines"
+        [value]="routine.routineName">
+        {{routine.routineName}}
+      </mat-radio-button>
+
+    </mat-radio-group>
+    <div>Your favorite season is: {{selectedRoutine}}</div>
   </mat-card-content>
 </mat-card>
+<!--
+<button mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>edit_note</mat-icon>
+    <span>Modify</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon color="warn">delete</mat-icon>
+    <span>Delete</span>
+  </button>
+</mat-menu> -->

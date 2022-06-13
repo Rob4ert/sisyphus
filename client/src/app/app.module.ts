@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupCardComponent } from './signup-card/signup-card.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './material.module';
 import { CustomErrorInterceptor } from './custom-error-interceptor';
 import { LoginCardComponent } from './login-card/login-card.component';
@@ -17,9 +17,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateRoutineComponent } from './create-rutine/create-routine.component';
 
 
-
 @NgModule({
   declarations: [
+
     AppComponent,
     SignupCardComponent,
     NavBarComponent,
@@ -27,7 +27,11 @@ import { CreateRoutineComponent } from './create-rutine/create-routine.component
     DashboardComponent,
     CreateRoutineComponent,
     DayDetailsCardComponent,
-    RoutineMenuComponent
+    RoutineMenuComponent,
+
+
+
+
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,8 @@ import { CreateRoutineComponent } from './create-rutine/create-routine.component
     ReactiveFormsModule,
     AngularMaterialModule,
     HttpClientModule,
+    FormsModule,
+
 
 
 

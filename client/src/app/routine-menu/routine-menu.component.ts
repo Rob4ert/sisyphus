@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { User } from '../interfaces';
 import { UserService } from '../user.service';
+NgModel;
 
 
 
@@ -14,14 +16,16 @@ export class RoutineMenuComponent implements OnInit {
 
   constructor(private userService: UserService) { }
   user: User | null = null;
-  subscription: Subscription | undefined;
+  selectedRoutine: any = '';
+
+
+  subscription: Subscription | null = null;
+
 
 
   ngOnInit(): void {
     this.subscription = this.userService.currentUser.subscribe(user => {
       this.user = user;
-      console.log('this.user.routines :>> ', this.user?.routines);
-      console.log('user routine menu :>> ', this.user);
     });
   }
 

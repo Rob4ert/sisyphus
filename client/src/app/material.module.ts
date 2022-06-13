@@ -24,6 +24,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -49,7 +50,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatStepperModule,
     MatExpansionModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+
 
   ],
   exports: [
