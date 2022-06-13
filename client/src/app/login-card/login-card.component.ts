@@ -38,9 +38,8 @@ export class LoginCardComponent implements OnInit {
   getPasswordError() {
     if (this.login.get('password')?.hasError('required')) {
       return 'You must enter a value';
-    } else {
-      return '';
     }
+    return '';
   }
 
 

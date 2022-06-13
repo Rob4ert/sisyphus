@@ -21,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import { MatCardModule } from '@angular/material/card';
     MatStepperModule,
     MatExpansionModule,
     MatCardModule,
-
+    MatMenuModule
 
   ],
   exports: [
@@ -73,6 +74,7 @@ import { MatCardModule } from '@angular/material/card';
     MatStepperModule,
     MatExpansionModule,
     MatCardModule,
+    MatMenuModule
 
   ],
   providers: [

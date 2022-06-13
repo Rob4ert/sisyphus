@@ -1,4 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { User } from '../interfaces';
+import { UserService } from '../user.service';
 
 
 
@@ -9,10 +12,16 @@ import { Component, Inject, OnInit } from '@angular/core';
 })
 export class RoutineMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService) { }
+  user: User | null = null;
+  subscription: Subscription | undefined;
 
 
   ngOnInit(): void {
+    this.subscription = this.userService.currentUser.subscribe(user => {
+      this.user = user;
+      console.log('user routine menu :>> ', this.user);
+    });
   }
 
 }

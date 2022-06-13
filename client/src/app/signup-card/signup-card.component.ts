@@ -51,7 +51,7 @@ export class SignupCardComponent implements OnInit {
   getPasswordError() {
     if (this.signup.get('password')?.hasError('required')) {
       return 'You must enter a value';
-    } else if (this.signup.get('password')?.value !== this.signup.get('repeatPassword')?.value) {
+    } if (this.signup.get('password')?.value !== this.signup.get('repeatPassword')?.value) {
       return 'password do not match!';
     }
     return '';
