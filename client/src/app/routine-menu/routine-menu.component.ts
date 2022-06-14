@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../interfaces';
 import { UserService } from '../user.service';
 import { APIClientService } from '../api-client.service';
+import { NotificationsService } from '../notifications.service';
 
 
 
@@ -14,6 +15,7 @@ import { APIClientService } from '../api-client.service';
 export class RoutineMenuComponent implements OnInit {
 
   constructor(
+    private notification: NotificationsService,
     private userService: UserService,
     private http: APIClientService
   ) { }
@@ -45,7 +47,10 @@ export class RoutineMenuComponent implements OnInit {
       this.user.routines.forEach(routine => {
         routine.isActive = routine.id === id;
       });
-      this.http.selectRoutine(this.user.routines).subscribe((routines) => this.userService.updateActiveRoutine(routines));
+      this.http.selectRoutine(this.user.routines).subscribe((routines) => {
+        this.userService.updateActiveRoutine(routines);
+        this.notification.createNotification(`${this.activeRoutine?.routineName}, activated!`);
+      });
     }
   }
 
@@ -59,6 +64,7 @@ export class RoutineMenuComponent implements OnInit {
           });
           this.user.routines = newRoutines;
           this.userService.updateUser(this.user);
+          this.notification.createNotification(`${deletedRoutine.routineName}, deleted!`);
         }
       });
     }
