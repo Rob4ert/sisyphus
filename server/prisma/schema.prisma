@@ -17,9 +17,9 @@ model Exercise {
   sets         Int
   isWeighted   Boolean?
   isTimed      Boolean?
-  day          Day      @relation(fields: [dayId], references: [id])
+  day          Day      @relation(fields: [dayId], references: [id], onDelete: Cascade)
   dayId        Int
-  user         User     @relation(fields: [userId], references: [id])
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int
 }
 
@@ -43,7 +43,7 @@ model Day {
   updatedAt DateTime   @updatedAt
   weekDays  String     @db.VarChar(255)
   exercises Exercise[]
-  routine   Routine    @relation(fields: [routineId], references: [id])
+  routine   Routine    @relation(fields: [routineId], references: [id], onDelete: Cascade)
   routineId Int
 }
 
@@ -54,7 +54,7 @@ model Routine {
   updatedAt   DateTime @updatedAt
   routineName String   @db.VarChar(255)
   days        Day[]
-  user        User     @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      Int
 }
 

@@ -11,6 +11,7 @@ export class UserService {
 
   currentUser = this.userSource.asObservable();
   activeRoutine = this.activeRoutineSource.asObservable();
+
   constructor() { }
 
   updateActiveRoutine(routines: Routine[]) {

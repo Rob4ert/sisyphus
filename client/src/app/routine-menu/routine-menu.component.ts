@@ -19,7 +19,7 @@ export class RoutineMenuComponent implements OnInit {
   ) { }
   public user: User | null = null;
 
-
+  public weekdays: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   public activeRoutine: Routine | null = null;
 
@@ -57,6 +57,14 @@ export class RoutineMenuComponent implements OnInit {
     }
   }
 
+  deleteRoutine() {
+    if (this.activeRoutine && this.user) {
+
+      this.http.deleteRoutine(this.activeRoutine).subscribe((deletedRoutine) => {
+        this.user?.routines.filter((routine) => { routine.id !== deletedRoutine.id; });
+      });
+    }
+
+  }
+
 }
-
-

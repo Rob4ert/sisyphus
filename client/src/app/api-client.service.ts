@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { User, Routine, ApiResponseRoutine, ApiResponseUser, ApiResponseRoutines } from './interfaces';
 
@@ -62,6 +62,23 @@ export class APIClientService {
       return response.data;
     }));
   }
+  deleteRoutine(routine: Routine) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true,
+      body: {
+        id: routine.id
+      },
+    };
+    return this.http.delete<ApiResponseRoutine>(`${url}/routine`, options).pipe(map(response => {
+      return response.data;
+    }));
+  }
+
+
+
 
   // getRoutine(routineId: number) {
   //   return this.http.get<ApiResponseRoutine>(`${url}/routine`, {

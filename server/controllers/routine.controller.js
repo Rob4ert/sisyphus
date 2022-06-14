@@ -1,5 +1,5 @@
 const { prisma } = require('../db');
-const { saveRoutine, readRoutines, reWriteRoutines } = require('../models/routine.model');
+const { saveRoutine, readRoutines, reWriteRoutines, eraseRoutine } = require('../models/routine.model');
 
 const createRoutine = async function (req, res) {
   const userId = req.session.uid;
@@ -16,14 +16,10 @@ const createRoutine = async function (req, res) {
 };
 
 const deleteRoutine = async function (req, res) {
-  const { id } = req.params;
+  const { id } = req.body;
   try {
-    const routine = await prisma.routine.delete({
-      where: {
-        id: parseInt(id)
-      },
-    });
-    res.status(201);
+    const routine = await eraseRoutine(id);
+    res.status(202);
     res.send({ error: null, data: routine });
   } catch (error) {
     res.status(400);

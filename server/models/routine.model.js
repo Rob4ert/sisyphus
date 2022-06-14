@@ -75,9 +75,18 @@ const reWriteRoutines = async function (routines) {
   return newRoutines;
 };
 
+const eraseRoutine = async function (id) {
+  const routine = await prisma.routine.delete({
+    where: {
+      id: parseInt(id)
+    },
+  });
+  delete routine.userId;
+  return routine;
+};
 
 
 module.exports = {
-  saveRoutine, readRoutines, reWriteRoutines
+  saveRoutine, readRoutines, reWriteRoutines, eraseRoutine
 };
 

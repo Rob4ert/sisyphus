@@ -24,7 +24,7 @@ router.post('/logout', checkLoggedIn, logout);
 // routine
 router.post('/routine', checkLoggedIn, createRoutine);
 router.put('/routine', checkLoggedIn, updateRoutines);
-router.delete('/:userId/routine/:id', checkLoggedIn, checkIsUser, deleteRoutine);
+router.delete('/routine', checkLoggedIn, deleteRoutine);
 router.get('/routine', checkLoggedIn, getRoutinesByUser);
 
 // days
