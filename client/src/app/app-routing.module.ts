@@ -1,3 +1,4 @@
+import { WorkoutComponent } from './workout/workout.component';
 import { RoutineMenuComponent } from './routine-menu/routine-menu.component';
 import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'create-routine', component: CreateRoutineComponent },
   { path: 'routine-menu', component: RoutineMenuComponent },
+  { path: 'workout', component: WorkoutComponent },
 ];
 
 @NgModule({

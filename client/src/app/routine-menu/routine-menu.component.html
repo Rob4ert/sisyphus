@@ -53,9 +53,10 @@
     </mat-accordion>
   </mat-card-content>
   <mat-divider></mat-divider>
-  <mat-card-actions><button mat-stroked-button>Back</button>
+  <mat-card-actions>
     <button mat-stroked-button color="warn" (click)="deleteRoutine()">Delete</button>
-    <button mat-raised-button color="primary" (click)="activateRoutine()">Use</button>
+    <button mat-raised-button color="accent" routerLink="/workout">Create a New Routine</button>
+    <button mat-raised-button color="primary" (click)="activateRoutine()">Activate Routine</button>
   </mat-card-actions>
 </mat-card>
 <!--

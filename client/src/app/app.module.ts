@@ -1,3 +1,4 @@
+import { WorkoutComponent } from './workout/workout.component';
 import { RoutineMenuComponent } from './routine-menu/routine-menu.component';
 import { DayDetailsCardComponent } from './day-details-card/day-details-card.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
@@ -28,6 +29,7 @@ import { CreateRoutineComponent } from './create-rutine/create-routine.component
     CreateRoutineComponent,
     DayDetailsCardComponent,
     RoutineMenuComponent,
+    WorkoutComponent
 
 
 
