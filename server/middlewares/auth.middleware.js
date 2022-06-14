@@ -3,7 +3,6 @@ const { findUserById } = require('../models/user.model');
 
 
 const checkLoggedIn = async function (req, res, next) {
-  console.log('req.session.uid :>> ', req.session.uid);
   if (req.session.uid) next();
   else {
     res.status(401);

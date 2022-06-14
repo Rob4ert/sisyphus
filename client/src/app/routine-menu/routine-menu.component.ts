@@ -51,7 +51,6 @@ export class RoutineMenuComponent implements OnInit {
 
   deleteRoutine() {
     if (this.activeRoutine && this.user) {
-      console.log('this.user first :>> ', this.user);
       this.http.deleteRoutine(this.activeRoutine).subscribe((deletedRoutine) => {
         if (this.user) {
           const newRoutines = this.user.routines.filter((routine) => {
