@@ -1,0 +1,17 @@
+.set-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+}
+
+mat-form-field {
+
+  max-width: 20%;
+}
+
+
+mat-checkbox {
+  margin-bottom: 20px;
+}

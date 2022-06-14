@@ -9,6 +9,20 @@ export interface User {
   exercise: any[],
 }
 
+export interface ExerciseSets {
+  reps: number,
+  exerciseName: string,
+  setList: any[];
+}
+
+export interface SetList {
+  name: string,
+  reps: number,
+  isFail: boolean,
+  isFinished: boolean,
+
+}
+
 export interface ApiResponseUser {
   data: User;
   error: string;
