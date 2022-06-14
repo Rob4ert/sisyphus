@@ -18,15 +18,13 @@ export class WorkoutComponent implements OnInit {
   public baseDate = new Date(Date.now());
   public workout: any;
 
-  public exerciseList: ExerciseSets[] = [{ exerciseName: 'pull ups', setList: [{ reps: 10, isFail: false, isFinished: false }], reps: 10 }];
+  public exerciseList: ExerciseSets[] = [];
 
 
-  setsArray = new FormArray([
-  ]);
+
 
   exercisesArray = new FormArray([]);
 
-  // formGroup workoutform => formarray exercises => formgroup exerciseIndex => formarray sets => formgroup setIndex
 
 
   public workoutForm: FormGroup = this.fb.group({
@@ -50,12 +48,12 @@ export class WorkoutComponent implements OnInit {
       if (routine) {
         this.activeRoutine = routine;
         this.setRoutineDay(routine);
-        console.log('this.workout :>> ', this.workout);
         this.setSets();
+        this.createExercisesGroups();
       }
     });
-    this.createExercisesGroups(2);
-    this.createSetsGroups(4);
+
+    console.log('this.exerciseList :>> ', this.exerciseList);
   }
 
 
@@ -67,36 +65,36 @@ export class WorkoutComponent implements OnInit {
       .get('sets') as FormArray;
   }
 
-  createExercisesGroups(num: number) {
-    for (let i = 0; i < num; i++) {
+  createExercisesGroups() {
+    this.exerciseList.forEach((exercise) => {
       this.exercisesArray.push(
         this.fb.group({
-          sets: this.setsArray
+          exerciseName: exercise.exerciseName,
+          sets: this.createSetsGroups(exercise)
         })
-
       );
-
-    }
-
+    });
   }
 
-
-  createSetsGroups(num: number) {
-    for (let i = 0; i < num; i++) {
-      this.setsArray.push(
+  createSetsGroups(exercise: any) {
+    const setsArray = new FormArray([
+    ]);
+    exercise.setList.forEach((set: SetList) => {
+      setsArray.push(
         this.fb.group({
-          reps: new FormControl('reps'),
-          weight: new FormControl('weight'),
-          isDone: new FormControl('isDone'),
-          isFail: new FormControl('isFail'),
+          reps: set.reps,
+          weight: 0,
+          isDone: set.isDone,
+          isFail: set.isFail,
         })
-
       );
-
-    }
+    });
+    return setsArray;
 
   }
-  // to here
+
+
+
 
 
   setRoutineDay(routine: Routine) {
@@ -155,14 +153,6 @@ export class WorkoutComponent implements OnInit {
   //     .get('exercises') as FormArray;
   // }
 
-  newExercise(): FormGroup {
-    return this.fb.group({
-      exerciseName: '',
-      sets: 1,
-      reps: 1,
-
-    });
-  }
 
   // addExercise(dayIndex: number) {
   //   this.exercises(dayIndex).push(this.newExercise());

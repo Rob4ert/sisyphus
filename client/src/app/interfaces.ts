@@ -19,7 +19,7 @@ export interface SetList {
   name: string,
   reps: number,
   isFail: boolean,
-  isFinished: boolean,
+  isDone: boolean,
 
 }
 
