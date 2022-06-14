@@ -19,8 +19,6 @@ export class SignupCardComponent implements OnInit {
     repeatPassword: new FormControl('', [Validators.required, Validators.min(6), Validators.max(20)]),
   });
 
-  public isLogging: boolean = true;
-
   constructor(
     private route: AppRoutingModule,
     private http: APIClientService,

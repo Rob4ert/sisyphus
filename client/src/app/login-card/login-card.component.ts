@@ -18,7 +18,7 @@ export class LoginCardComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.min(6), Validators.max(20)]),
   });
 
-
+  hide = true;
 
   constructor(
     private route: AppRoutingModule,
