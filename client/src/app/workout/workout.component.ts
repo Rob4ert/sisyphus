@@ -52,24 +52,18 @@ export class WorkoutComponent implements OnInit {
         this.createExercisesGroups();
       }
     });
-
-    console.log('this.exerciseList :>> ', this.exerciseList);
   }
 
 
   // sets working from here
 
-  sets(exerciseIndex: number): FormArray {
-    return this.exercises()
-      .at(exerciseIndex)
-      .get('sets') as FormArray;
-  }
 
   createExercisesGroups() {
     this.exerciseList.forEach((exercise) => {
       this.exercisesArray.push(
         this.fb.group({
           exerciseName: exercise.exerciseName,
+          reps: exercise.reps,
           sets: this.createSetsGroups(exercise)
         })
       );
@@ -112,28 +106,6 @@ export class WorkoutComponent implements OnInit {
     return this.workoutForm.get('exercises') as FormArray;
   }
 
-  // newExercise(): FormGroup {
-  //   return this.fb.group({
-  //     exerciseName: '',
-  //     sets: 1,
-  //     reps: 1,
-  //   });
-  // }
-
-  // sets(exerciseIndex: number): FormArray {
-  //   return this.exercises()
-  //     .at(exerciseIndex)
-  //     .get('sets') as FormArray;
-  // }
-
-
-  // addExercise() {
-  //   this.exercises().push(this.newExercise());
-  // }
-
-  // removeExercise(exerciseIndex: number) {
-  //   this.exercises().removeAt(exerciseIndex);
-  // }
 
   // set logic
 
@@ -147,20 +119,22 @@ export class WorkoutComponent implements OnInit {
     });
   }
 
-  // exercises(dayIndex: number): FormArray {
-  //   return this.days(dayIndex)
-  //     .at(dayIndex)
-  //     .get('exercises') as FormArray;
-  // }
+  sets(exerciseIndex: number): FormArray {
+    return this.exercises()
+      .at(exerciseIndex)
+      .get('sets') as FormArray;
+  }
 
+  resetForm() {
+    this.exercisesArray = new FormArray([]);
+    this.createExercisesGroups();
+  }
 
-  // addExercise(dayIndex: number) {
-  //   this.exercises(dayIndex).push(this.newExercise());
-  // }
+  finishWorkout() {
+    this.user.isDone = true;
+    this.userService.updateUser(this.user);
+  }
 
-  // removeExercise(dayIndex: number, skillIndex: number) {
-  //   this.exercises(dayIndex).removeAt(skillIndex);
-  // }
 }
 
 

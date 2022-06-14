@@ -12,6 +12,8 @@ export class DayDetailsCardComponent implements OnInit {
   @Input()
   date!: any;
 
+  @Input()
+  isDone!: any;
 
   constructor() { }
 

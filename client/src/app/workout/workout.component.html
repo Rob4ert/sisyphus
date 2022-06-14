@@ -1,82 +1,44 @@
-<!-- <div [formGroup]="workoutForm">
-  <div formArrayName="sets">
-    <ng-container *ngFor="let set of sets().controls exerciseList[0].setList; let setIndex=index">
-      <div [formGroupName]="setIndex" class="set-container">
-        <mat-form-field appearance="standard">
-          <mat-label>Reps</mat-label>
-          <input matInput type="number" min="1" value="1" formControlName="reps">
-        </mat-form-field>
-        <mat-form-field appearance="standard">
-          <mat-label>Weight</mat-label>
-          <input matInput type="number" placeholder="12" min="0" value="0" formControlName="weight">
-        </mat-form-field>
-        <mat-checkbox color="primary" formControlName="isDone">Done</mat-checkbox>
-        <mat-checkbox color="warn" formControlName="isFail">Fail</mat-checkbox>
-      </div>
-    </ng-container>
-  </div>
-</div> -->
-
-<form [formGroup]="workoutForm">
-  <div formArrayName="exercises">
-    <mat-accordion *ngFor="let exercise of exercises().controls ; let exerciseIndex=index">
-      <div class="day-container" [formGroupName]="exerciseIndex">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{exercise.value.exerciseName}}
-            </mat-panel-title>
-            <mat-panel-description>
-              <!-- {{exercise.setList.length}}x{{exercise.reps}} -->
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div formArrayName="sets">
-            <ng-container *ngFor="let set of sets(exerciseIndex).controls;; let setIndex=index">
-              <div [formGroupName]="setIndex" class="set-container">
-                <mat-form-field appearance="standard">
-                  <mat-label>Reps</mat-label>
-                  <input matInput type="number" min="1" value='2' formControlName="reps">
-                </mat-form-field>
-                <mat-form-field appearance="standard">
-                  <mat-label>Weight</mat-label>
-                  <input matInput type="number" placeholder="12" min="0" value="0" formControlName="weight">
-                </mat-form-field>
-                <mat-checkbox color="primary" formControlName="isDone">Done</mat-checkbox>
-                <mat-checkbox color="warn" formControlName="isFail">Fail</mat-checkbox>
+<mat-card>
+  <mat-card-title>Workout</mat-card-title>
+  <mat-card-subtitle>Exercises for today</mat-card-subtitle>
+  <mat-card-content>
+    <form [formGroup]="workoutForm">
+      <div formArrayName="exercises">
+        <mat-accordion *ngFor="let exercise of exercises().controls ; let exerciseIndex=index">
+          <div class="day-container" [formGroupName]="exerciseIndex">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{exercise.value.exerciseName}}
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{exercise.value.sets.length}}x{{exercise.value.reps}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div formArrayName="sets">
+                <ng-container *ngFor="let set of sets(exerciseIndex).controls;; let setIndex=index">
+                  <div [formGroupName]="setIndex" class="set-container">
+                    <mat-form-field appearance="standard">
+                      <mat-label>Reps</mat-label>
+                      <input matInput type="number" min="1" value='2' formControlName="reps">
+                    </mat-form-field>
+                    <mat-form-field appearance="standard">
+                      <mat-label>Weight</mat-label>
+                      <input matInput type="number" placeholder="12" min="0" value="0" formControlName="weight">
+                    </mat-form-field>
+                    <mat-checkbox color="primary" formControlName="isDone">Done</mat-checkbox>
+                    <mat-checkbox color="warn" formControlName="isFail">Fail</mat-checkbox>
+                  </div>
+                </ng-container>
               </div>
-            </ng-container>
+            </mat-expansion-panel>
           </div>
-        </mat-expansion-panel>
+        </mat-accordion>
       </div>
-    </mat-accordion>
-  </div>
-  <button mat-raised-button color="primary">Finish</button>
-</form>
-<!-- formGroup workoutform => formarray exercises => formgroup exerciseIndex => formarray sets => formgroup setIndex-->
-<!-- <div>
-  <div formArrayName="exercises">
-    <div *ngFor="let exercise of exercises().controls; let exerciseIndex=index">
-      <div class="exercise" [formGroupName]="exerciseIndex">
-        <mat-form-field appearance="outline">
-          <mat-label>Name your exercise</mat-label>
-          <input matInput type="text" formControlName="exerciseName" placeholder="Exercise Name">
-        </mat-form-field>
-        <button mat-icon-button>
-          <mat-icon matSuffix color="warn">delete</mat-icon>
-        </button>
-        <mat-form-field appearance="standard">
-          <mat-label>Sets</mat-label>
-          <input matInput type="number" placeholder="12" min="1" formControlName="sets">
-        </mat-form-field>
-        <mat-form-field appearance="standard">
-          <mat-label>Reps</mat-label>
-          <input matInput type="number" placeholder="12" min="1" formControlName="reps">
-        </mat-form-field>
-      </div>
-    </div>
-
-    <button mat-icon-button color="primary">
-      <mat-icon>add</mat-icon> Add a new Exercise
-    </button>
-  </div>
-</div> -->
+    </form>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="warn" (click)="resetForm()">Cancel</button>
+    <button mat-raised-button color="primary" routerLink="/dashboard" (click)="finishWorkout()">Finish</button>
+  </mat-card-actions>
+</mat-card>

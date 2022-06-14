@@ -15,8 +15,18 @@ table {
 .day-pointer mat-icon {
   transform: scale(3);
   margin: -10px 0px -10px 0px;
+  z-index: 3;
 }
 
+
 .today {
-  background-color: #c2185b;
+  background-color: #c2185c;
+}
+
+.finish {
+  text-align: justify;
+}
+
+.isDone {
+  background-color: #f44336;
 }

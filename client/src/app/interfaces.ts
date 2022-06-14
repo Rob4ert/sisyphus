@@ -1,5 +1,6 @@
 
 export interface User {
+  isDone?: boolean;
   id: string,
   name?: string,
   email: String,
@@ -52,13 +53,3 @@ export interface Day {
   weekDays: number[];
 }
 
-
-// model User {
-//   id        Int @id @default (autoincrement())
-//   createdAt DateTime @default (now())
-//   updatedAt DateTime @updatedAt
-//   email     String @unique
-//   password  String
-//   name      String
-
-// }
