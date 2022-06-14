@@ -39,14 +39,6 @@ export class RoutineMenuComponent implements OnInit {
 
   }
 
-  // updateActiveRoutine(routines: Routine[]) {
-  //   routines.map((routine) => {
-  //     if (routine.isActive) {
-  //       this.userService.updateActiveRoutine(routine);
-  //     }
-  //   });
-  // }
-
   activateRoutine() {
     if (this.activeRoutine && this.user) {
       const id = this.activeRoutine.id;
@@ -59,9 +51,16 @@ export class RoutineMenuComponent implements OnInit {
 
   deleteRoutine() {
     if (this.activeRoutine && this.user) {
-
+      console.log('this.user first :>> ', this.user);
       this.http.deleteRoutine(this.activeRoutine).subscribe((deletedRoutine) => {
-        this.user?.routines.filter((routine) => { routine.id !== deletedRoutine.id; });
+        if (this.user) {
+          const newRoutines = this.user.routines.filter((routine) => {
+            return routine.id !== deletedRoutine.id;
+
+          });
+          this.user.routines = newRoutines;
+          this.userService.updateUser(this.user);
+        }
       });
     }
 
