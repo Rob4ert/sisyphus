@@ -1,1 +1,42 @@
-<p>workout works!</p>
+<mat-accordion *ngFor="let exercise of workout.exercises">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{exercise.exerciseName}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{exercise.sets}}x{{exercise.reps}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>{{exercise.reps}} weight: 50kg fail ( )</p>
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+<!-- <div [formGroup]="routineForm">
+  <div formArrayName="exercises">
+    <div *ngFor="let exercise of exercises().controls; let exerciseIndex=index">
+      <div class="exercise" [formGroupName]="exerciseIndex">
+        <mat-form-field appearance="outline">
+          <mat-label>Name your exercise</mat-label>
+          <input matInput type="text" formControlName="exerciseName" placeholder="Exercise Name">
+        </mat-form-field>
+        <button mat-icon-button>
+          <mat-icon matSuffix color="warn" (click)="removeExercise(exerciseIndex)">delete</mat-icon>
+        </button>
+        <mat-form-field appearance="standard">
+          <mat-label>Sets</mat-label>
+          <input matInput type="number" placeholder="12" min="1" formControlName="sets">
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Reps</mat-label>
+          <input matInput type="number" placeholder="12" min="1" formControlName="reps">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <button mat-icon-button color="primary" (click)="addExercise()">
+      <mat-icon>add</mat-icon> Add a new Exercise
+    </button>
+  </div>
+</div> -->

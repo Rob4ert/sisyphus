@@ -31,7 +31,7 @@
             </button>
             <!-- loop of exercises -->
             <div formArrayName="exercises">
-              <div *ngFor="let skill of exercises(dayIndex).controls; let exerciseIndex=index">
+              <div *ngFor="let exercise of exercises(dayIndex).controls; let exerciseIndex=index">
                 <div class="exercise" [formGroupName]="exerciseIndex">
                   <mat-form-field appearance="outline">
                     <mat-label>Name your exercise</mat-label>

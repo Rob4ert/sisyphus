@@ -41,7 +41,7 @@ model Day {
   dayName   String     @db.VarChar(255)
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  weekDays  String     @db.VarChar(255)
+  weekDays  String?    @db.VarChar(255)
   exercises Exercise[]
   routine   Routine    @relation(fields: [routineId], references: [id], onDelete: Cascade)
   routineId Int
