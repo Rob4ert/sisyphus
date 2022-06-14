@@ -1,4 +1,4 @@
-<div [formGroup]="workoutForm">
+<!-- <div [formGroup]="workoutForm">
   <div formArrayName="sets">
     <ng-container *ngFor="let set of sets().controls exerciseList[0].setList; let setIndex=index">
       <div [formGroupName]="setIndex" class="set-container">
@@ -15,27 +15,27 @@
       </div>
     </ng-container>
   </div>
-</div>
+</div> -->
 
-<!-- <form [formGroup]="workoutForm">
+<form [formGroup]="workoutForm">
   <div formArrayName="exercises">
-    <mat-accordion *ngFor="let exercise of exerciseList ; let exerciseIndex=index">
+    <mat-accordion *ngFor="let exercise of exercises().controls ; let exerciseIndex=index">
       <div class="day-container" [formGroupName]="exerciseIndex">
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{exercise.exerciseName}}
+              <!-- {{exercise.exerciseName}} -->
             </mat-panel-title>
             <mat-panel-description>
-              {{exercise.setList.length}}x{{exercise.reps}}
+              <!-- {{exercise.setList.length}}x{{exercise.reps}} -->
             </mat-panel-description>
           </mat-expansion-panel-header>
           <div formArrayName="sets">
-            <ng-container *ngFor="let set of exercise.setList; let setIndex=index">
+            <ng-container *ngFor="let set of sets(exerciseIndex).controls;; let setIndex=index">
               <div [formGroupName]="setIndex" class="set-container">
                 <mat-form-field appearance="standard">
                   <mat-label>Reps</mat-label>
-                  <input matInput type="number" min="1" value="{{set.reps}}" formControlName="reps">
+                  <input matInput type="number" min="1" value='2' formControlName="reps">
                 </mat-form-field>
                 <mat-form-field appearance="standard">
                   <mat-label>Weight</mat-label>
@@ -51,7 +51,7 @@
     </mat-accordion>
   </div>
   <button mat-raised-button color="primary">Finish</button>
-</form> -->
+</form>
 <!-- formGroup workoutform => formarray exercises => formgroup exerciseIndex => formarray sets => formgroup setIndex-->
 <!-- <div>
   <div formArrayName="exercises">

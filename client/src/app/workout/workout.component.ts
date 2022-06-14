@@ -11,7 +11,7 @@ import { UserService } from '../user.service';
 })
 export class WorkoutComponent implements OnInit {
 
-  // formGroup workoutform => formarray exercises => formgroup exerciseIndex => formarray sets => formgroup setIndex
+
   public user: any;
   public activeRoutine: any;
 
@@ -20,39 +20,20 @@ export class WorkoutComponent implements OnInit {
 
   public exerciseList: ExerciseSets[] = [{ exerciseName: 'pull ups', setList: [{ reps: 10, isFail: false, isFinished: false }], reps: 10 }];
 
-  // const arr = new FormArray([
-
-  // ]);
-
 
   setsArray = new FormArray([
-
-
   ]);
 
+  exercisesArray = new FormArray([]);
+
+  // formGroup workoutform => formarray exercises => formgroup exerciseIndex => formarray sets => formgroup setIndex
+
+
   public workoutForm: FormGroup = this.fb.group({
-    sets: this.setsArray
+    exercises: this.exercisesArray
   });
 
 
-  // public workoutForm: FormGroup = this.fb.group({
-  //   exercises: this.fb.array([
-  //     //   this.fb.group({
-  //     //     sets: this.fb.array([
-  //     //       this.fb.group({
-  //     //         reps: new FormControl('reps'),
-  //     //         weight: new FormControl('weight'),
-  //     //         isDone: new FormControl('isDone'),
-  //     //         isFail: new FormControl('isFail'),
-  //     //       })
-  //     //     ])
-  //     //   })
-  //     //   // new FormControl('reps'),
-  //     //   // new FormControl('weight'),
-  //     //   // new FormControl('isDone'),
-  //     //   // new FormControl('isFail'),
-  //   ])
-  // });
 
   constructor(
     private userService: UserService,
@@ -73,12 +54,30 @@ export class WorkoutComponent implements OnInit {
         this.setSets();
       }
     });
+    this.createExercisesGroups(2);
     this.createSetsGroups(4);
   }
 
+
   // sets working from here
-  sets(): FormArray {
-    return this.workoutForm.get('sets') as FormArray;
+
+  sets(exerciseIndex: number): FormArray {
+    return this.exercises()
+      .at(exerciseIndex)
+      .get('sets') as FormArray;
+  }
+
+  createExercisesGroups(num: number) {
+    for (let i = 0; i < num; i++) {
+      this.exercisesArray.push(
+        this.fb.group({
+          sets: this.setsArray
+        })
+
+      );
+
+    }
+
   }
 
 
