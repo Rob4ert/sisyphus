@@ -20,7 +20,6 @@ export class DashboardComponent {
   public dates: any[] = [];
 
   // routine
-  public routines: any;
   public activeRoutine: any;
 
   constructor(
@@ -28,31 +27,34 @@ export class DashboardComponent {
   ) { }
 
   ngOnInit() {
+    this.setDates(this.baseDate);
     this.userService.currentUser.subscribe(user => {
-      this.user = user;
-      this.setDates(this.baseDate);
       if (user) {
-        this.setRoutineDays(user);
-        this.routines = this.user?.routines;
-      };
+        this.user = user;
+        this.userService.updateActiveRoutine(user.routines);
+      }
     });
-    this.userService.activeRoutine.subscribe((routine) => this.activeRoutine = routine);
+    this.userService.activeRoutine.subscribe((routine) => {
+      if (routine) {
+        this.activeRoutine = routine;
+        this.setRoutineDays(routine);
+      }
+    });
+
   }
   // routine methods
 
-  setRoutineDays(user: User) {
-    user.routines[2].days.forEach((routineDay: Day) => {
+  setRoutineDays(routine: Routine) {
+    routine.days.forEach((routineDay: Day) => {
       if (routineDay.weekDays) {
-        const weekDays = routineDay.weekDays;
         this.dates.forEach((date) => {
-          if (weekDays.includes(date.weekDay)) {
+          if (routineDay.weekDays.includes(date.weekDay)) {
             date.routineDay = routineDay;
             date.isWorkDay = true;
           }
         });
       }
     });
-
   }
 
 
@@ -72,7 +74,7 @@ export class DashboardComponent {
       });
       date.setDate(date.getDate() + 1);
     }
-    this.setRoutineDays(this.user);
+
   }
 
   isToday(date: Date) {
@@ -88,11 +90,13 @@ export class DashboardComponent {
   moveForward() {
     this.baseDate.setDate(this.baseDate.getDate() - 1);
     this.setDates(this.baseDate);
+    this.setRoutineDays(this.activeRoutine);
   }
 
   moveBack() {
     this.baseDate.setDate(this.baseDate.getDate() - 3);
     this.setDates(this.baseDate);
+    this.setRoutineDays(this.activeRoutine);
   }
 
 

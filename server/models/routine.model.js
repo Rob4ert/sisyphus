@@ -60,10 +60,14 @@ const readRoutines = async function (userId) {
 };
 
 const reWriteRoutines = async function (routines) {
+  // here I am not checking ofr the user ID => security problem
   const newRoutines = await Promise.all(routines.map(async (routine) => {
     const newRoutine = await prisma.routine.update({
       where: { id: parseInt(routine.id) },
       data: { isActive: routine.isActive },
+      include: {
+        days: true,
+      },
     });
     delete newRoutine.userId;
     return newRoutine;
