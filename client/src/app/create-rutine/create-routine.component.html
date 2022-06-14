@@ -40,14 +40,16 @@
                   <button mat-icon-button>
                     <mat-icon matSuffix color="warn" (click)="removeExercise(dayIndex,exerciseIndex)">delete</mat-icon>
                   </button>
-                  <mat-form-field appearance="standard">
-                    <mat-label>Sets</mat-label>
-                    <input matInput type="number" placeholder="12" min="1" formControlName="sets">
-                  </mat-form-field>
-                  <mat-form-field appearance="standard">
-                    <mat-label>Reps</mat-label>
-                    <input matInput type="number" placeholder="12" min="1" formControlName="reps">
-                  </mat-form-field>
+                  <div>
+                    <mat-form-field class="number-input" appearance="standard">
+                      <mat-label>Sets</mat-label>
+                      <input matInput type="number" placeholder="12" min="1" formControlName="sets">
+                    </mat-form-field>
+                    <mat-form-field class="number-input" appearance="standard">
+                      <mat-label>Reps</mat-label>
+                      <input matInput type="number" placeholder="12" min="1" formControlName="reps">
+                    </mat-form-field>
+                  </div>
                 </div>
               </div>
             </div>
