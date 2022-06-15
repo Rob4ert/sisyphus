@@ -4,6 +4,7 @@ import { User } from '../interfaces';
 import { UserService } from '../user.service';
 import { APIClientService } from '../api-client.service';
 import { NotificationsService } from '../notifications.service';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 
@@ -14,18 +15,19 @@ import { NotificationsService } from '../notifications.service';
 })
 export class RoutineMenuComponent implements OnInit {
 
-  constructor(
-    private notification: NotificationsService,
-    private userService: UserService,
-    private http: APIClientService
-  ) { }
+
   public user: User | null = null;
 
-  public weekdays: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   public activeRoutine: Routine | null = null;
 
   displayedColumns: string[] = ['name', 'sets', 'reps'];
+
+  constructor(
+    private notification: NotificationsService,
+    private userService: UserService,
+    private http: APIClientService,
+  ) { }
 
   ngOnInit(): void {
     this.userService.currentUser.subscribe(user => {
@@ -34,9 +36,7 @@ export class RoutineMenuComponent implements OnInit {
       }
     });
     this.userService.activeRoutine.subscribe(routine => {
-      if (this.user) {
-        this.activeRoutine = routine;
-      }
+      this.activeRoutine = routine;
     });
 
   }
@@ -68,7 +68,6 @@ export class RoutineMenuComponent implements OnInit {
         }
       });
     }
-
   }
 
 }
