@@ -9,17 +9,6 @@
         {{routine.routineName}}
       </mat-radio-button>
     </mat-radio-group>
-
-    <!-- dropdown menu -->
-    <!-- <mat-form-field *ngFor="let weekday of weekdays" [value]="weekday">
-      <mat-label>{{weekday}}</mat-label>
-      <select matNativeControl required>
-        <option *ngFor="let day of activeRoutine?.days" [value]="day">
-          {{ day.dayName }}
-        </option>
-      </select>
-    </mat-form-field> -->
-
     <!-- acordions for each RoutineDay -->
     <mat-accordion>
       <h3>{{activeRoutine?.routineName}}</h3>
@@ -53,25 +42,11 @@
     </mat-accordion>
   </mat-card-content>
   <mat-divider></mat-divider>
+  <!-- actions section -->
   <mat-card-actions align="end">
     <button mat-stroked-button color="warn" (click)="deleteRoutine()">Delete</button>
     <button mat-raised-button color="primary" disabled>Share</button>
     <button mat-raised-button color="primary" (click)="activateRoutine()">Activate</button>
     <button mat-raised-button color="accent" routerLink="/create-routine">Create</button>
-
   </mat-card-actions>
 </mat-card>
-<!--
-<button mat-icon-button [matMenuTriggerFor]="menu">
-  <mat-icon>more_vert</mat-icon>
-</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item>
-    <mat-icon>edit_note</mat-icon>
-    <span>Modify</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon color="warn">delete</mat-icon>
-    <span>Delete</span>
-  </button>
-</mat-menu> -->
