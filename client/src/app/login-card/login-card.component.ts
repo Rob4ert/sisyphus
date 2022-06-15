@@ -48,7 +48,6 @@ export class LoginCardComponent implements OnInit {
       this.http.loginUser(user).subscribe((user) => {
         this.login.reset();
         this.userService.updateUser(user);
-        console.log('user :>> ', user);
         this.notification.createNotification(`Welcome back, ${user.name}!`);
         this.route.sendTo('dashboard');
       });
