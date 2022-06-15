@@ -12,19 +12,9 @@ const signInConfig = [
     .normalizeEmail(),
 
   check("password")
-    .isLength({ min: 8, max: 15 })
-    .withMessage("your password should have min and max length between 8-15.")
-    .matches(/\d/)
-    .withMessage("your password should have at least one number.")
-    .matches(/[!@#$%^&*(),.?":{}|<>]/)
-    .withMessage("your password should have at least one special character."),
+    .isLength({ min: 6, max: 20 })
+    .withMessage("your password should have min and max length between 6-20.")
 
-  check("repeatPassword").custom((value, { req }) => {
-    if (value !== req.body.password) {
-      throw new Error("Passwords does not match.");
-    }
-    return true;
-  }),
 ];
 
 const signInValidator = function (req, res, next) {

@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { checkLoggedIn, checkIsUser } = require('../middlewares/auth.middleware');
+const { checkLoggedIn } = require('../middlewares/auth.middleware');
 const { createUser, login, logout, getUser } = require('../controllers/user.controller');
 const { createRoutine, deleteRoutine, updateRoutines, getRoutinesByUser } = require('../controllers/routine.controller');
 const { signInValidator, signInConfig, logInConfig, logInValidator } = require('../middlewares/validators.middleware');
@@ -7,7 +7,7 @@ const { signInValidator, signInConfig, logInConfig, logInValidator } = require('
 const router = new Router();
 
 // users
-router.post('/', createUser);
+router.post('/', signInConfig, signInValidator, createUser);
 router.post('/login', logInConfig, logInValidator, login);
 router.get('/login', getUser);
 router.post('/logout', checkLoggedIn, logout);
