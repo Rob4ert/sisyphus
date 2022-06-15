@@ -23,19 +23,6 @@ model Exercise {
   userId       Int
 }
 
-// model Set {
-//   id         Int      @id @default(autoincrement())
-//   weight     Int?
-//   time       Int?
-//   reps       Int
-//   fail       Boolean?
-//   exercise   Exercise @relation(fields: [exerciseId], references: [id])
-//   exerciseId Int
-//   day        Day      @relation(fields: [dayId], references: [id])
-//   dayId      Int
-
-// }
-
 model Day {
   id        Int        @id @default(autoincrement())
   dayName   String     @db.VarChar(255)
