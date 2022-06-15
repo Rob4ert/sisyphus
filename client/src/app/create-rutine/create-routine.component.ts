@@ -1,3 +1,4 @@
+import { Day } from './../interfaces';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { APIClientService } from '../api-client.service';
@@ -87,13 +88,32 @@ export class CreateRoutineComponent implements OnInit {
   onSubmit() {
     const routine = {
       routineName: this.firstFormGroup.value.routineName,
-      days: this.routineForm.value.days,
+      days: this.addWeekdays(this.routineForm.value.days)
     };
+    console.log(' this.routineForm.value.days,:>> ', this.routineForm.value.days);
     this.http.SaveRoutine(routine)
       .subscribe((res) => {
         this.notification.createNotification(`New Routine: ${res.routineName}, created!`);
       });
   }
+  addWeekdays(days: Day[]) {
+    if (days.length === 2) {
+      days[0].weekDays = [1, 4];
+      days[1].weekDays = [2, 5];
+    } else if (days.length === 3) {
+      days[0].weekDays = [1];
+      days[1].weekDays = [3];
+      days[2].weekDays = [5];
+    }
+    else if (days.length === 4) {
+      days[0].weekDays = [1];
+      days[1].weekDays = [2];
+      days[2].weekDays = [4];
+      days[3].weekDays = [5];
+    }
+    return days;
+  }
+
 
 }
 

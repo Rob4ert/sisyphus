@@ -17,7 +17,7 @@ const saveRoutine = async function (routine, userId) {
     const newDay = await prisma.day.create({
       data: {
         dayName: day.dayName,
-        weekDays: day.weekDays,
+        weekDays: JSON.stringify(day.weekDays),
         routine: { connect: { id: newRoutine.id } },
       },
       include: {
