@@ -44,7 +44,6 @@ export class NavBarComponent {
   ngOnInit() {
     this.subscription = this.userService.currentUser.subscribe(user => {
       this.user = user;
-      console.log('user nav bar:>> ', user);
     });
   }
 

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Day, Routine } from '../interfaces';
 import { UserService } from '../user.service';
+import { AppRoutingModule } from '../app-routing.module';
 
 @Component({
   selector: 'app-workout',
@@ -11,22 +12,21 @@ import { UserService } from '../user.service';
 })
 export class WorkoutComponent implements OnInit {
 
-
+  //userService variables
   public user: any;
   public activeRoutine: any;
 
+  // dates
   public baseDate = new Date(Date.now());
-  public workout: any;
 
+  // exercises variables
+  public workout: any;
   public exerciseList: ExerciseSets[] = [];
 
 
 
-
+  // forms
   exercisesArray = new FormArray([]);
-
-
-
   public workoutForm: FormGroup = this.fb.group({
     exercises: this.exercisesArray
   });
@@ -36,6 +36,7 @@ export class WorkoutComponent implements OnInit {
   constructor(
     private userService: UserService,
     private fb: FormBuilder,
+    private route: AppRoutingModule,
   ) { }
 
   ngOnInit(): void {
@@ -55,7 +56,7 @@ export class WorkoutComponent implements OnInit {
   }
 
 
-  // sets working from here
+  // forms methods
 
 
   createExercisesGroups() {
@@ -86,9 +87,6 @@ export class WorkoutComponent implements OnInit {
     return setsArray;
 
   }
-
-
-
 
 
   setRoutineDay(routine: Routine) {
@@ -125,6 +123,8 @@ export class WorkoutComponent implements OnInit {
       .get('sets') as FormArray;
   }
 
+  // form logic
+
   resetForm() {
     this.exercisesArray = new FormArray([]);
     this.createExercisesGroups();
@@ -133,6 +133,7 @@ export class WorkoutComponent implements OnInit {
   finishWorkout() {
     this.user.isDone = true;
     this.userService.updateUser(this.user);
+    this.route.sendTo('dashboard');
   }
 
 }
