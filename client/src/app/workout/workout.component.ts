@@ -1,9 +1,8 @@
 import { ExerciseSets, SetList } from './../interfaces';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Day, Routine } from '../interfaces';
 import { UserService } from '../user.service';
-import { AppRoutingModule } from '../app-routing.module';
 
 @Component({
   selector: 'app-workout',
@@ -12,20 +11,20 @@ import { AppRoutingModule } from '../app-routing.module';
 })
 export class WorkoutComponent implements OnInit {
 
-  //userService variables
+  // subscriptions
   public user: any;
   public activeRoutine: any;
 
-  // dates
+  // date variable
   public baseDate = new Date(Date.now());
 
-  // exercises variables
+  // exercise variables
   public workout: any;
   public exerciseList: ExerciseSets[] = [];
 
 
 
-  // forms
+  // forms variables
   exercisesArray = new FormArray([]);
   public workoutForm: FormGroup = this.fb.group({
     exercises: this.exercisesArray
@@ -36,7 +35,6 @@ export class WorkoutComponent implements OnInit {
   constructor(
     private userService: UserService,
     private fb: FormBuilder,
-    private route: AppRoutingModule,
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +54,7 @@ export class WorkoutComponent implements OnInit {
   }
 
 
-  // forms methods
+  // form methods
 
 
   createExercisesGroups() {
@@ -88,24 +86,22 @@ export class WorkoutComponent implements OnInit {
 
   }
 
-
-  setRoutineDay(routine: Routine) {
-    routine.days.forEach((workout: Day) => {
-      if (workout.weekDays.includes(this.baseDate.getDay())) {
-        this.workout = workout;
-      }
-    });
-  }
-
-
-  // exercise logic
-
   exercises(): FormArray {
     return this.workoutForm.get('exercises') as FormArray;
   }
 
+  sets(exerciseIndex: number): FormArray {
+    return this.exercises()
+      .at(exerciseIndex)
+      .get('sets') as FormArray;
+  }
 
-  // set logic
+  resetForm() {
+    this.exercisesArray = new FormArray([]);
+    this.createExercisesGroups();
+  }
+
+  // methods for organizing the information
 
   setSets() {
     this.workout.exercises.forEach((exercise: any) => {
@@ -117,23 +113,20 @@ export class WorkoutComponent implements OnInit {
     });
   }
 
-  sets(exerciseIndex: number): FormArray {
-    return this.exercises()
-      .at(exerciseIndex)
-      .get('sets') as FormArray;
+  setRoutineDay(routine: Routine) {
+    routine.days.forEach((workout: Day) => {
+      if (workout.weekDays.includes(this.baseDate.getDay())) {
+        this.workout = workout;
+      }
+    });
   }
 
-  // form logic
-
-  resetForm() {
-    this.exercisesArray = new FormArray([]);
-    this.createExercisesGroups();
-  }
+  // workout finish hanlder
 
   finishWorkout() {
     this.user.isDone = true;
     this.userService.updateUser(this.user);
-    this.route.sendTo('dashboard');
+
   }
 
 }
