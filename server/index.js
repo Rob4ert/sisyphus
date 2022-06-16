@@ -1,7 +1,7 @@
 const Express = require('express');
 const session = require('express-session');
 const cors = require('cors');
-
+require('dotenv').config();
 const { router } = require('./routes/router');
 
 
@@ -38,3 +38,5 @@ app.use(router);
     console.log(error);
   }
 })();
+
+// process.env.COOKIE_SECRET
