@@ -6,7 +6,8 @@ const {
   logout,
   getUser,
 } = require('../controllers/user.controller');
-// const { createRoutine, deleteRoutine, updateRoutines, getRoutinesByUser } = require('../controllers/routine.controller');
+
+const { createRoutine } = require('../controllers/routine.controller');
 const {
   signInValidator,
   signInConfig,
@@ -22,8 +23,8 @@ router.post('/', signInConfig, signInValidator, createUser);
 // router.get('/login', getUser);
 // router.post('/logout', checkLoggedIn, logout);
 
-// // routine
-// router.post('/routine', checkLoggedIn, createRoutine);
+// routine
+router.post('/routine', checkLoggedIn, createRoutine);
 // router.put('/routine', checkLoggedIn, updateRoutines);
 // router.delete('/routine', checkLoggedIn, deleteRoutine);
 // router.get('/routine', checkLoggedIn, getRoutinesByUser);

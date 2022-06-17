@@ -1,11 +1,11 @@
 const bcrypt = require('bcrypt');
 const db = require('../models/db');
 
-const { findUser, writeUser, findUserById } = require('./user.model');
+const { findUser, findUserById } = require('./user.model');
 
 const saltRounds = 10;
 
-const createUser = async function (req, res) {
+const createUser = async (req, res) => {
   const user = req.body;
   bcrypt.hash(user.password, saltRounds, async function (err, hash) {
     if (err) console.log(err);
@@ -14,7 +14,7 @@ const createUser = async function (req, res) {
       const newUser = await db.User.create({
         email: user.email,
         name: user.name,
-        password: user.hash,
+        password: user.password,
       }).catch((err) => console.log(err));
       req.session.regenerate(() => {
         return (req.session.uid = newUser.id);
