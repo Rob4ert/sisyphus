@@ -13,9 +13,9 @@ const corsConfig = {
 };
 
 const app = new Express();
-
 app.use(cors(corsConfig));
 app.set('trust proxy', 1); // trust first proxy
+
 app.use(
   session({
     name: 'sessionId',

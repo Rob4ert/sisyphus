@@ -16,8 +16,11 @@
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "express-validator": "^6.14.1",
+
+
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.21.0"
+
   }
 }
