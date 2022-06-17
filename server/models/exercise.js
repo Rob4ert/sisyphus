@@ -1,5 +1,3 @@
-const Routine = require('./routine');
-
 module.exports = (sequelize, DataTypes) => {
   const Exercise = sequelize.define('Exercise', {
     id: {
@@ -12,14 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     sets: DataTypes.INTEGER,
     isWeighted: DataTypes.BOOLEAN,
     isTimed: DataTypes.BOOLEAN,
-    // routine_id: {
-    //   type: DataTypes.INTEGER,
-
-    //   references: {
-    //     model: Routine,
-    //     key: 'id',
-    //   },
-    // },
   });
   return Exercise;
 };

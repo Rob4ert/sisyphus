@@ -1,13 +1,23 @@
 const { Router } = require('express');
 const { checkLoggedIn } = require('../middlewares/auth.middleware');
-// const { createUser, login, logout, getUser } = require('../controllers/user.controller');
+const {
+  createUser,
+  login,
+  logout,
+  getUser,
+} = require('../controllers/user.controller');
 // const { createRoutine, deleteRoutine, updateRoutines, getRoutinesByUser } = require('../controllers/routine.controller');
-// const { signInValidator, signInConfig, logInConfig, logInValidator } = require('../middlewares/validators.middleware');
+const {
+  signInValidator,
+  signInConfig,
+  logInConfig,
+  logInValidator,
+} = require('../middlewares/validators.middleware');
 
 const router = new Router();
 
-// // users
-// router.post('/', signInConfig, signInValidator, createUser);
+// users
+router.post('/', signInConfig, signInValidator, createUser);
 // router.post('/login', logInConfig, logInValidator, login);
 // router.get('/login', getUser);
 // router.post('/logout', checkLoggedIn, logout);

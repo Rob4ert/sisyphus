@@ -1,8 +1,52 @@
 const bcrypt = require('bcrypt');
+const db = require('../models/db');
 
 const { findUser, writeUser, findUserById } = require('./user.model');
 
 const saltRounds = 10;
+
+const createUser = async function (req, res) {
+  const user = req.body;
+  bcrypt.hash(user.password, saltRounds, async function (err, hash) {
+    if (err) console.log(err);
+    try {
+      user.password = hash;
+      const newUser = await db.User.create({
+        email: user.email,
+        name: user.name,
+        password: user.hash,
+      }).catch((err) => console.log(err));
+      req.session.regenerate(() => {
+        return (req.session.uid = newUser.id);
+      });
+      delete newUser.password;
+      delete newUser.id;
+      res.status(201);
+      res.send({ error: null, data: newUser });
+    } catch (error) {
+      if (error.meta?.target[0] === 'email') {
+        res.status(409);
+        res.send({ error: 'Email already in use.', data: null });
+      } else {
+        res.status(503);
+        res.send();
+      }
+    }
+  });
+};
+const getUser = async function (req, res) {
+  const id = req.session.uid;
+  try {
+    const user = await findUserById(id);
+    delete user.password;
+    delete user.id;
+    res.status(200);
+    res.send({ error: null, data: user });
+  } catch (error) {
+    res.status(401);
+    res.send({ error: 'You are not logged in.', data: null });
+  }
+};
 
 const login = async (req, res) => {
   const { password, email } = req.body;
@@ -27,46 +71,6 @@ const login = async (req, res) => {
       res.send({ error: 'wrong email or password.', data: null });
     }
   }
-};
-
-const getUser = async function (req, res) {
-  const id = req.session.uid;
-  try {
-    const user = await findUserById(id);
-    delete user.password;
-    delete user.id;
-    res.status(200);
-    res.send({ error: null, data: user });
-  } catch (error) {
-    res.status(401);
-    res.send({ error: 'You are not logged in.', data: null });
-  }
-};
-
-const createUser = async function (req, res) {
-  const user = req.body;
-  bcrypt.hash(user.password, saltRounds, async function (err, hash) {
-    if (err) console.log(err);
-    try {
-      user.password = hash;
-      const newUser = await writeUser(user);
-      req.session.regenerate(() => {
-        return (req.session.uid = newUser.id);
-      });
-      delete newUser.password;
-      delete newUser.id;
-      res.status(201);
-      res.send({ error: null, data: newUser });
-    } catch (error) {
-      if (error.meta?.target[0] === 'email') {
-        res.status(409);
-        res.send({ error: 'Email already in use.', data: null });
-      } else {
-        res.status(503);
-        res.send();
-      }
-    }
-  });
 };
 
 const logout = (req, res) => {
