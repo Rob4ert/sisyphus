@@ -1,9 +1,8 @@
 const bcrypt = require('bcrypt');
 
-const { findUser, writeUser, findUserById } = require('../models/user.model');
+const { findUser, writeUser, findUserById } = require('./user.model');
 
 const saltRounds = 10;
-
 
 const login = async (req, res) => {
   const { password, email } = req.body;
@@ -21,10 +20,8 @@ const login = async (req, res) => {
           delete user.id;
           res.status(200);
           res.send({ error: null, data: user });
-        }
-        );
-      }
-      );
+        });
+      });
     } else {
       res.status(400);
       res.send({ error: 'wrong email or password.', data: null });
@@ -42,7 +39,7 @@ const getUser = async function (req, res) {
     res.send({ error: null, data: user });
   } catch (error) {
     res.status(401);
-    res.send({ error: "You are not logged in.", data: null });
+    res.send({ error: 'You are not logged in.', data: null });
   }
 };
 
@@ -54,7 +51,7 @@ const createUser = async function (req, res) {
       user.password = hash;
       const newUser = await writeUser(user);
       req.session.regenerate(() => {
-        return req.session.uid = newUser.id;
+        return (req.session.uid = newUser.id);
       });
       delete newUser.password;
       delete newUser.id;
@@ -63,7 +60,7 @@ const createUser = async function (req, res) {
     } catch (error) {
       if (error.meta?.target[0] === 'email') {
         res.status(409);
-        res.send({ error: "Email already in use.", data: null });
+        res.send({ error: 'Email already in use.', data: null });
       } else {
         res.status(503);
         res.send();
@@ -76,14 +73,12 @@ const logout = (req, res) => {
   req.session.destroy();
   res.clearCookie('sessionId');
   res.status(200);
-  res.send({ error: "You are logged out.", data: null });
+  res.send({ error: 'You are logged out.', data: null });
 };
-
 
 module.exports = {
-  createUser, login, logout, getUser
+  createUser,
+  login,
+  logout,
+  getUser,
 };
-
-
-
-

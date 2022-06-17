@@ -1,5 +1,10 @@
 const { prisma } = require('../db');
-const { saveRoutine, readRoutines, reWriteRoutines, eraseRoutine } = require('../models/routine.model');
+const {
+  saveRoutine,
+  readRoutines,
+  reWriteRoutines,
+  eraseRoutine,
+} = require('./routine.model');
 
 const createRoutine = async function (req, res) {
   const userId = req.session.uid;
@@ -10,7 +15,10 @@ const createRoutine = async function (req, res) {
     res.send({ error: null, data: newRoutine });
   } catch (error) {
     res.status(400);
-    res.send({ error: "Error creating routine, please try again.", data: null });
+    res.send({
+      error: 'Error creating routine, please try again.',
+      data: null,
+    });
     console.log('error :>> ', error);
   }
 };
@@ -23,7 +31,10 @@ const deleteRoutine = async function (req, res) {
     res.send({ error: null, data: routine });
   } catch (error) {
     res.status(400);
-    res.send({ error: "Error deleting routine, please try again.", data: null });
+    res.send({
+      error: 'Error deleting routine, please try again.',
+      data: null,
+    });
     console.log('error :>> ', error);
   }
 };
@@ -36,7 +47,10 @@ const updateRoutines = async function (req, res) {
     res.send({ error: null, data: newRoutines });
   } catch (error) {
     res.status(400);
-    res.send({ error: "Error updating routine, please try again.", data: null });
+    res.send({
+      error: 'Error updating routine, please try again.',
+      data: null,
+    });
     console.log('error :>> ', error);
   }
 };
@@ -49,11 +63,17 @@ const getRoutinesByUser = async function (req, res) {
     res.send({ error: null, data: routines });
   } catch (error) {
     res.status(400);
-    res.send({ error: "Error fetching routines, please try again.", data: null });
+    res.send({
+      error: 'Error fetching routines, please try again.',
+      data: null,
+    });
     console.log('error :>> ', error);
   }
 };
 
 module.exports = {
-  createRoutine, deleteRoutine, updateRoutines, getRoutinesByUser
+  createRoutine,
+  deleteRoutine,
+  updateRoutines,
+  getRoutinesByUser,
 };
