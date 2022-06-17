@@ -1,5 +1,3 @@
-const User = require('./user');
-
 module.exports = (sequelize, DataTypes) => {
   const Routine = sequelize.define('Routine', {
     id: {
@@ -8,14 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
     },
     routineName: DataTypes.STRING,
-    // user_id: {
-    //   type: DataTypes.INTEGER,
-
-    //   references: {
-    //     model: User,
-    //     key: 'id',
-    //   },
-    // },
+    days: DataTypes.ARRAY(DataTypes.INTEGER),
   });
   Routine.associate = (db) => {
     Routine.hasMany(db.Exercise);

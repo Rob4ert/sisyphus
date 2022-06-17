@@ -1,4 +1,3 @@
-const { prisma } = require('../db');
 const {
   saveRoutine,
   readRoutines,
