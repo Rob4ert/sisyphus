@@ -1,3 +1,5 @@
+const db = require('../../models/db');
+
 const writeExercise = async (exercise, routineId) => {
   try {
     await db.Exercise.create({
@@ -13,15 +15,42 @@ const writeExercise = async (exercise, routineId) => {
   }
 };
 
-const readExercises = async () => {
-  //should return all exercises where routineId matches foreign key
+const readExercises = async (RoutineId) => {
+  try {
+    await db.Exercise.findAll({
+      where: {
+        RoutineId: RoutineId,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const updateExercise = async () => {
+const updateExercise = async (exercise, routineId) => {
+  try {
+    await db.Exercise.update(exercise, {
+      where: {
+        RoutineId: routineId,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
   //should update and return single exercise where routineId matches foreign key and exercise name matches
 };
 
-const destroyExercise = async () => {
+const destroyExercise = async (routineId, exercise) => {
+  try {
+    await db.Exercise.destroy({
+      where: {
+        exerciseName: exercise.name,
+        RoutineId: routineId,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
   //should destroy single exercise where routineId matches foreign key and exercise name matches
 };
 
