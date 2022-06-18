@@ -8,7 +8,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   host: '127.0.0.1',
   dialect: 'postgres',
-  // logging: false,
+  logging: false,
 });
 
 sequelize

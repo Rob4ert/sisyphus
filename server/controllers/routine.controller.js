@@ -2,10 +2,10 @@ const { writeExercise } = require('./queries/exercise.query');
 const { writeRoutine } = require('./queries/routine.query');
 
 const createRoutine = async function (req, res) {
-  const userId = req.session.uid;
+  const userId = 1;
   const routine = req.body;
   try {
-    const newRoutine = writeRoutine(routine, userId);
+    const newRoutine = await writeRoutine(routine, userId);
     routine.exercises.map((exercise) => {
       writeExercise(exercise, newRoutine.id);
     });

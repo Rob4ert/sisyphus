@@ -24,7 +24,7 @@ router.post('/', signInConfig, signInValidator, createUser);
 // router.post('/logout', checkLoggedIn, logout);
 
 // routine
-router.post('/routine', checkLoggedIn, createRoutine);
+router.post('/routine', createRoutine);
 // router.put('/routine', checkLoggedIn, updateRoutines);
 // router.delete('/routine', checkLoggedIn, deleteRoutine);
 // router.get('/routine', checkLoggedIn, getRoutinesByUser);

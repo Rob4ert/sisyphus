@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
     },
     routineName: DataTypes.STRING,
-    days: DataTypes.ARRAY(DataTypes.INTEGER),
+    days: { type: DataTypes.ARRAY(DataTypes.INTEGER), defaultValue: null },
   });
   Routine.associate = (db) => {
     Routine.hasMany(db.Exercise);

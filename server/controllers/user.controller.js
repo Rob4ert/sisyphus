@@ -1,25 +1,16 @@
 const bcrypt = require('bcrypt');
-const db = require('../models/db');
-
-<<<<<<< HEAD
+const { writeUser, readUser } = require('./queries/user.query');
 // const { findUser, findUserById } = require('../models/l');
-=======
-// const { findUser, findUserById } = require('../models');
->>>>>>> ae16a70189fb994d93aee977fbee3b16bffdd710
 
 const saltRounds = 10;
 
-const createUser = async (req, res) => {
+const createUser = (req, res) => {
   const user = req.body;
   bcrypt.hash(user.password, saltRounds, async function (err, hash) {
     if (err) console.log(err);
     try {
       user.password = hash;
-      const newUser = await db.User.create({
-        email: user.email,
-        name: user.name,
-        password: user.password,
-      }).catch((err) => console.log(err));
+      const newUser = await writeUser(user);
       req.session.regenerate(() => {
         return (req.session.uid = newUser.id);
       });
@@ -32,21 +23,23 @@ const createUser = async (req, res) => {
         res.status(409);
         res.send({ error: 'Email already in use.', data: null });
       } else {
+        console.log(error);
         res.status(503);
         res.send();
       }
     }
   });
 };
+
 const getUser = async function (req, res) {
-  const id = req.session.uid;
+  // const id = req.session.uid;
+  const id = req.body.id;
   try {
-    const user = await findUserById(id);
-    delete user.password;
-    delete user.id;
+    const user = await readUser(id);
     res.status(200);
     res.send({ error: null, data: user });
   } catch (error) {
+    console.log(error);
     res.status(401);
     res.send({ error: 'You are not logged in.', data: null });
   }

@@ -1,6 +1,8 @@
+const db = require('../../models/db');
+
 const writeUser = async (user) => {
   try {
-    await db.User.create({
+    return await db.User.create({
       email: user.email,
       name: user.name,
       password: user.password,
@@ -13,3 +15,5 @@ const writeUser = async (user) => {
 const readUser = async (id) => {
   // should return: user details where id matches, associated routines and associated exercises for those routines
 };
+
+module.exports = { writeUser, readUser };
