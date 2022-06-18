@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const db = require('../models/db');
 
-const { findUser, findUserById } = require('./user.model');
+// const { findUser, findUserById } = require('../models/l');
 
 const saltRounds = 10;
 
