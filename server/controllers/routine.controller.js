@@ -7,11 +7,12 @@ const createRoutine = async function (req, res) {  // Works
   const routine = req.body;
   try {
     const newRoutine = await writeRoutine(routine, userId);
-    routine.exercises.map((exercise) => {
+    routine.exercises?.map((exercise) => {
       writeExercise(exercise, newRoutine.id);
     });
     res.status(201);
     res.send({ error: null, data: newRoutine });
+    
   } catch (error) {
     res.status(400);
     res.send({
