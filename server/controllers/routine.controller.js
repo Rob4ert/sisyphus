@@ -1,4 +1,5 @@
 const { writeExercise } = require('./queries/exercise.query');
+
 const { writeRoutine, readRoutines, destroyRoutine, updateRoutines } = require('./queries/routine.query');
 
 const createRoutine = async function (req, res) {  // Works
@@ -21,6 +22,7 @@ const createRoutine = async function (req, res) {  // Works
   }
 };
 const deleteRoutine = async function (req, res) {
+
   // WORKS
   const userId = 1;
   // req.session.uid;
@@ -56,6 +58,7 @@ const updateRoutine = async function (req, res) {
     console.log('error :>> ', error);
   }
 };
+
 const getRoutinesByUser = async function (req, res) { // Works
   const userId = 1
   // req.session.uid;

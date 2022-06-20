@@ -13,6 +13,7 @@ const readRoutines = async (userId) => { // Works
 };
 
 const writeRoutine = async (routine, userId) => {  // Works
+
   try {
     return await db.Routine.create({
       routineName: routine.routineName,
@@ -23,6 +24,7 @@ const writeRoutine = async (routine, userId) => {  // Works
     console.log(error);
   }
 };
+
 
 const updateRoutines = async (routine, userId) => {
   // Test me
@@ -56,5 +58,6 @@ const destroyRoutine = async (routine, userId) => {
     console.log(error);
   }
 };
+
 
 module.exports = { writeRoutine, readRoutines, updateRoutines, destroyRoutine };

@@ -7,6 +7,7 @@ const {
   getUser,
 } = require('../controllers/user.controller');
 
+
 const { createRoutine, getRoutinesByUser, deleteRoutine, updateRoutine } = require('../controllers/routine.controller');
 const {
   signInValidator,
