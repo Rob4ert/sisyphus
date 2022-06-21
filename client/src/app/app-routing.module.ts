@@ -7,9 +7,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginCardComponent } from './login-card/login-card.component';
 import { SignupCardComponent } from './signup-card/signup-card.component';
 
-
 const routes: Routes = [
   { path: 'signup', component: SignupCardComponent },
+  { path: '', component: LoginCardComponent },
   { path: 'login', component: LoginCardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'create-routine', component: CreateRoutineComponent },
@@ -19,10 +19,10 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   sendTo(route: string) {
     this.router.navigate([`/${route}`]);
