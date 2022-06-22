@@ -19,4 +19,8 @@ const createExercise = async (req, res) => {
     });
     console.log('error :>> ', error);
   }
-};
+}
+
+module.exports = {
+  createExercise};
+ 
