@@ -2,7 +2,9 @@
 
 // Mocks
 var mocks = {
-  TrueEX: [123],
+  email: 'ferdi',
+  name: 'ferdi',
+  password: 'ferdi',
 }
 
 module.exports = mocks;

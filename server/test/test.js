@@ -1,40 +1,39 @@
-// npm
+//------------------------------------------------------------------------------
+
 //const proxyquire = require('proxyquire')
 require('chai').should();
+const { expect } = require('chai');
 const { stub, match } = require('sinon')
 const { mockRequest, mockResponse } = require('mock-req-res')
-const res = mockResponse()
-
-
 
 const index = require('../index.js');
-const exerciseControllerJS = require('../controllers/exercise.controller.js');
-const EXC = exerciseControllerJS.createExercise
-const mockSave = stub()
+console.log('Server Test')
 const mocks = require('./mocks.js');
 
-
+//const mockSave = stub()
+const res = mockResponse()
 const name = 'some name'
 const description = 'some description'
 const req = mockRequest({ body: { name, description } })
   
 
+//------------------------------------------------------------------------------
+
+const exerciseControllerJS = require('../controllers/exercise.controller.js');
+const EXC = exerciseControllerJS.createExercise
 
 
-
-describe('createExercise', function () {
-
-  it('should create Excerice', function () {
- EXC(res, req);
-
-  it('called save with the right data', () => {
-    expect(save).to.have.been.calledWith(match({ name, description }))
-  })
-  
-
+  describe('createExercise', function () {
+    it('should create Excerice', function () {
+      EXC(res, req);
+        it('called save with the right data', () => {
+          expect(save).to.have.been.calledWith(match({ name, description }))
+       })
+     });
   });
 
-});
+
+
 
 // describe('/Users/ferdinandlucas/Desktop/codeworks/sisypg', () => {
 //   const mockSave = stub()
@@ -76,4 +75,34 @@ describe('createExercise', function () {
 // })
 
 
+//--------------------------------------------------------------------------
 
+const userQueries = require('../controllers/queries/user.query.js');
+const UQ = userQueries.writeUser
+
+  describe ('user.query', function(){
+    it ('should query user'), () => {
+      UQ(ferdi).should.equal(mocks)
+    }
+  })
+
+//--------------------------------------------------------------------------
+
+const userController = require('../controllers/user.controller.js');
+const UC = userController.createUser
+const GU = userController.getUser
+
+  describe ('user.create', function(){
+    it ('should be able to test user'), () => {
+      UC(res, req).should.equal(mockRequest, mockResponse)
+    }
+  })
+
+  describe ('login', function(){
+    it ('should be able to test user'), () => {
+     userController.login(res, req)
+    }
+  })
+
+ 
+ 
