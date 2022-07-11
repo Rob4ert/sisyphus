@@ -1,4 +1,5 @@
-<h1 align="center">Sisyphus</h1>
+<h1 align="center"><img src="./1655392900125.jpeg" align="center" /></h1>
+
 
 Workout logger and exercise routine tracker. Simple desing combined with sizeable functionality. Available in web and mobile version (Atlas)
 
@@ -26,7 +27,9 @@ Installation:
 
 Atlas is a fully responsive mobile version of Sisyphus converted with Capacitor
 
-Installation:
+![Screenshot](Atlasscreen.png)
+
+## Installation:
   - download and install [Android SDK Studio](#developer.android.com/studio) 
   - in client and server folder run npm i
   - inside capacitor.config change server url to your ip address.
